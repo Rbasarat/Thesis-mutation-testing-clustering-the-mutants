@@ -9,6 +9,7 @@ Next, we will compare existing mutation testing tools. We start of by reviewing 
 \todo{do this when we finished experiments and all}
 \todo{subsuming mutants}
 \todo{levensteihn distance}
+\todo{maven and gradle}
 \section{Project selection}
 We chose two main requirements for selecting software projects; the projects should have a test suite and the test suite should not contain failing tests.
 We started out by selecting projects that were also used in other research within the mutation testing and testing domain\cite{Pizzoleto2019,Yu2019PossibilityScope,Wei2021SpectralTesting, Zhang2019PredictiveTesting, Chen2018SpeedingStudy, Laurent2017AssessingPIT}.
@@ -19,5 +20,33 @@ We ended up with a total sample of 21 projects.
 These projects consists of Java libraries, Android libraries and Java applications.
 
 \section{Clustering algorithms}
-
+This research focuses on clustering mutants and use of existing clustering algorithms. 
+Many different types of clustering algorithms have been proposed\cite{Rodriguez2019}. While there is a lot of diversity, some methods are more frequently used than others\cite{Wu2008TopMining}. 
+Rodriguez et al., compared the performance of nine different clustering algorithms:
+\begin{itemize}
+    \item k-means
+    \item CLARA
+    \item hierarchical
+    \item EM
+    \item hcmodel
+    \item spectral
+    \item subscpace
+    \item optics
+    \item dbscan
+\end{itemize}
+The goal of their study was to guide researchers, who have little experience in data mining techniques, to the application of clustering methods.
+They evaluated the algorithms in three distinct situations: default parameters, single parameter variation and random variation of parameters.
+They used 400 generated artificial data sets which were normally distributed.
+\newline
+The results reported in their research are respective to specific configurations of normally distributed data and algorithmic implementations.
+Nonetheless they do give a good overview on how the algorithms compare to each other.
+\newline
+For the default parameter situation the spectral clustering algorithm had the best performance and the hierarchical algorithm had the worst performance.
+\newline
+Regarding single parameter variations, for data sets containing 2 columns, the hierarchical, optics and EM methods showed significant performance variation.
+\newline
+With respect to the multidimensional analysis for data sets, the performance of the algorithms for the multidimensional selection of parameters was similar to that using the default parameters.
+They conclude their research with observing that, for data sets with 10 or more columns the spectral algorithm consistently provided the best performance.
+However the EM, hierarchical, k- means and subspace algorithms can also achieve similar performance with some parameter tuning.
+The optics and dbscan algorithms aim at different data distributions than performed in this study. There different results could be obtained for non-normally distributed data.
 \end{document}
