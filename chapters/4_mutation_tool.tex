@@ -89,7 +89,7 @@ EMM & Modifier method change                                    & \multicolumn{1
 \caption{\label{tab:mutators-current}Current mutators supported.}
 \end{table}
 \newpage
-Tools sometimes implement the same mutator differently, resulting in different mutant sets. Table \ref{tab:mutators-overlap} shows an overview over the relations between the mutators of MuJava and PIT. This overview takes into account the mutators that are not already in the studies of Kintis et al., and Marki and Lindstrom. However some of the new mutators map to the existing mutators.
+Tools sometimes implement the same mutator differently, resulting in different mutant sets. Table \ref{tab:mutators-overlap} shows an overview over the relations between the mutators of MuJava and PIT. This overview does include the mutators that have been reviewed in the studies of Kintis et al., and Marki and Lindstrom. However some of the new mutators map to the existing mutators.
 
 \begin{table}[htb]
 \centering
@@ -107,6 +107,7 @@ AODS & Arithmetic Operator   Deletion Short-cut    & RI                   & Remo
 ROR  & Relational Operator   Replacement           & CB                   & Conditionals Boundary                      \\ \hline
 AORS & Arithmetic Operator   Replacement Short-Cut & I                    & Increments                                 \\ \hline
 COD  & Conditional Operator   Deletion             & RC                   & Remove Conditionials                       \\ \hline
+
 \end{tabular}
 \caption{\label{tab:mutators-overlap}Overview of mutator overlaps between  MuJavav and PIT}
 \end{table}
