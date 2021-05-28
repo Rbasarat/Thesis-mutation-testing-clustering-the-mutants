@@ -1,0 +1,102 @@
+\documentclass[../main]{subfiles}
+\begin{document}
+
+\chapter{Identifying characteristics}
+\label{ch:clustering_characteristics}
+Our goal is to cluster mutants based on characteristics. 
+To achieve this we need to identify characteristics that the mutants contain. 
+In this chapter we identify characteristics which we can use for clustering. 
+
+\section{Overview of characteristics}
+Zhang et al., identifies several mutant characteristics\cite{Zhang2019PredictiveTesting}. 
+Their research focuses on detecting if a mutant survives or not before executing the mutant.
+While the goal of their research is different than ours, we can still use the characteristics they identified.
+We select characteristics relevant to our research from the research of Zhang et al.
+We extend the list of characteristics with data we can extract from our selected mutation testing tool. 
+\newline
+PIT generates and executes mutants on byte code level\cite{pitestBytecode}.
+By mutating in Java byte code we can identify characteristics specific to Java byte code.
+PIT also gathers mutant metadata.
+We can extract this mutant metadata and identify characteristics. 
+With the combination of information extracted from PIT and characteristics selected from existing research we identify the following characteristics:
+\begin{enumerate}
+    \item Mutant similarity.
+    \item Amount of tests the mutant is challenged by.
+    \item Mutator identifier.
+    \item Mutant opcode.
+    \item Mutant return type.
+    \item Mutant contains local variables.
+    \item Mutant is in try catch block.
+    \item Mutant is in finally block.
+    \item Number of mutated byte code instructions.
+    \item Name of class that contains the mutant.
+    \item Name of function that contains the mutant.
+    \item Line number of block that contains the mutant.
+    \item Line number on which the mutation occur.
+    \item Number of lines of byte code of mutated class.
+\end{enumerate}
+In the following subsections we will elaborate more on these characteristics.
+
+\section{Mutant similarity}
+A piece of code is a textual representation of instructions for a computer.
+A mutant is a transformation of a piece of code.
+This transformation is predefined.
+The difference between a mutant and its parent can be defined as similarity.
+We identify the similarity between a mutant and parent as a characteristic.
+\newline
+To measure this characteristic we select a similarity measure.
+There are existing similarities measures that base their similarity in different ways\cite{Gomma2013AApproaches}. 
+We select the Levenshtein distance as similarity measure for our research\cite{Gomma2013AApproaches}.
+The Levenshtein distance defines the distance between two strings by counting the minimum number of operations(create/edit/delete) needed to transform one string into the other\cite{Gomma2013AApproaches}.
+The more the textual representation of a mutant differs from its parent the bigger the Levenshtein distance will be.
+
+\section{Amount of tests challenged by mutant}
+A mutant may be challenged by tests.
+If the test fails, the mutant is considered killed.
+If the test passes, the mutant is considered survived.
+If the mutant is not challenged by any tests it is also considered survived.
+The amount of tests a mutant is challenged by is dependant on the coverage and test effectiveness of the test suite.
+We identify this number as a characteristic.
+
+\section{Mutator identifier}
+At the time of writing the selected mutation testing tool PIT supports more than 100 mutators\cite{pitestMutators}.
+A mutator is the definition of how the code is mutated from its original\cite{Offutt2001}.
+Each mutator mutates the source code in a dfferent way.
+PIT assigns identifiers to their mutators for execution and reporting purposes. 
+Each mutant has a mutator identifier that matches with how the mutant is mutated from the source code.
+We can extract this data from PIT and use it as a characteristic.
+
+\section{Mutant opcode}
+\say{A Java Virtual Machine instruction consists of a one-byte opcode specifying the operation to be performed, followed by zero or more operands supplying arguments or data that are used by the operation.} (Java 12 SE docs ch.12).
+When PIT mutates the source code it uses Java opcodes to alter the original byte code. 
+A record of which opcode is being used is stored in memory during the mutation testing process. 
+This opcode can differ per mutator and is dependant on how the code is written.
+During the mutation testing process of PIT we can extract the opcode.
+We identify the opcode as a characteristic.
+
+\section{Mutant return type}
+A mutant may contain a return statement. 
+This is dependant on the source code that is mutated.
+A return statement can be identified as a characteristic.
+If a mutant contains a return statement, we can extract its type from PIT.
+There is the possibility that a mutant does not contain a return statement, in this case we will set the mutant return type to a default value.
+
+\section{Mutant location}
+The location of a mutant in PIT is defined by multiple properties;
+the name of the class, the name of the function, the line number of the start of the block the mutant is located in and the line number the mutation occurs on.
+These properties refer to the location in Java byte code.
+The location can be identified as a characteristic of a mutant.
+PIT uses this location in the mutation testing and reporting processes.
+We can extract the location as defined by the properties in PIT.
+Each property is identified as a characters
+
+\section{Extracting characteristics}
+PIT exposes some of the characteristics with its plugin system.
+Unfortunately not all characteristics are readily available for extraction.
+To extract all the characteristics from PIT we create a modified version of the application.
+We adjust the existing code to export the characteristics per mutant in various stages of the mutation testing process.
+We create a new model that stores the listed characteristics trough out the mutation testing process. 
+The data can be written to a file during the reporting stage of the process. 
+
+
+\end{document}

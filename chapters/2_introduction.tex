@@ -46,7 +46,6 @@ However in their paper they indicate that the choosing expressions as the domain
 A recurring problem in the research of mutation clustering is to determine the means of domains as the centre of a cluster\cite{Ji2009,Wilinski2015,Ma2016,Wei2021SpectralTesting}.
 
 
-\subsection{Research questions}
 To reduce the cost of mutation testing, we try to find a solution that can cluster mutants while maintaining the accuracy of the same complete set of mutants. 
 Our goal is to cluster any mutant that is generated.
 We will do this with two different approaches.
@@ -58,13 +57,12 @@ We structure our research on the following research questions:
 \textbf{Research Question 1.1}: How do the existing mutation testing tools for Java compare to each other?
 \newline
 \textbf{Research Question 2}: How can we train a machine learning model to recognize and cluster generated mutants to reduce the amount executed, while maintaining effectiveness?
-
-\subsection{Research method}
+\newline
 We start with comparing existing mutation testing tools. 
 We will use the existing literature as a starting point and research what would be the best tool to use for this thesis.
 \newline
 After we have selected a tool we will research existing clustering techniques.
-Based on the results of this research we select and implement one or more clustering algorithm that will cluster mutants. 
+Based on the results of this research we select and implement a clustering algorithm that will cluster a characteristic of the mutants. 
 One or more mutants of each cluster will be executed by the mutation tooling.
 We will then compare the mutation score of the clustered mutants with the mutation score of a full set of mutants.
 \newline

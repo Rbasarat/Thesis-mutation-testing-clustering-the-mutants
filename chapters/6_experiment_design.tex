@@ -1,0 +1,92 @@
+\documentclass[../main]{subfiles}
+\begin{document}
+\chapter{Experiment design}
+\todo{expand this}
+We hypothesise that there is a we can cluster on the characteristics of a mutant such that each mutant should be a representative for all of the mutants in its cluster.
+Our goal is to achieve a mutation score that is as close as possible to the mutation score of a full set of executed mutants.
+
+We design an experiment in which we implement the following steps:
+\begin{enumerate}
+    \item Extract all the characteristics.
+    \item For each mutant calculate the Levenshtein distance.
+    \item Cluster the mutants based on the characteristics.
+    \item Randomly select one mutant from each cluster.
+    \item Execute the selected mutants in PIT and calculate the mutation score.
+\end{enumerate}
+We elaborate on these steps in the following subsections.
+
+\subsection{Levenshtein distance on Java byte code}
+A mutant is a piece of code that differs in a predefined way from its parent.
+Java source code compiles into Java byte code.
+During the compilation of Java code certain context is abstracted away\cite{byteCodeEngineering}.
+Optimisations are applied which also changes the Java byte code\cite{byteCodeEngineering}.
+As a result the textual similarity between a Java code mutant and its parent is different from the similarity between a Java byte code mutant and its parent.
+While the textual similarity may be different between the Java code and Java byte code the functionality remains the same.
+Java byte code reflects more of the semantic nature of the source code than the source code itself does. 
+\newline
+PIT generates and executes mutants on byte code level\cite{pitestBytecode}. 
+In other words PIT executes the unit tests of a source against the byte code of a mutant.
+\newline
+For this experiment we will use the Levenshtein distance between a Java byte code mutant and its parent.
+By calculating the distance on byte code we filter out the context that is present in Java code.
+This gives us a Levenshtein distance that represents more of the semantic difference, between a mutant and parent, than calculating the distance for Java code.
+
+\subsection{Levenshtein distance implementation}
+write here that we use a memory efficient algorithm
+
+
+\subsection{Hierarchical clustering}
+Clustering Levenshtein distances has been done before with hierarchical clustering\cite{Rajalingam2011HierarchicalStudy, Gothai2010PerformanceAlgorithms}. 
+Hierarchical clustering is subdivided into agglomerative and divisive. 
+The agglomerative hierarchical technique follows bottom up approach whereas divisive follows top-down approaches.
+Hierarchical clustering uses different metrics which measures the the distance between two clusters and the linkage criteria\cite{Rajalingam2011HierarchicalStudy}. 
+The linkage criteria specifies the dissimilarity in the sets as a function of the pair-wise distances of observations in those sets\cite{Rajalingam2011HierarchicalStudy}.
+\newline
+Research shows that the complete linkage outperforms the single linkage method\cite{Vijaya2019ComparativeClustering}.
+The ward linkage and complete linkage methods perform the same when clusters are well separated\cite{Vijaya2019ComparativeClustering}.
+However if the clusters overlap the ward linkage outperforms the complete linkage\cite{Vijaya2019ComparativeClustering}.
+\newline
+We identify each Levenshtein distance between a mutant and its parent as a separate cluster.
+Starting out with each mutant as a separate cluster we can use the agglomerative form of hierarchical clustering.
+Since we cannot assume that our clusters are well separated we chose to use the ward linkage method for our clustering algorithm.
+The agglormorative hierarchical clustering algorithm with ward linkage will cluster our mutants represented as Levenshtein distances.
+\todo{write about implementation}
+
+\subsection{Weighed mutation score}
+Our hypothesis states that each mutants should be a representative for all the mutants in its cluster. 
+This translates to if a mutant survives or is killed all mutants in that cluster should survive or be killed respectively.
+To reflect this in our experiment a weighed mutation score is calculated for the clustered mutants.
+This weighed mutation score is the product of the result of a mutant(1 for killed and 0 for survived) and the amount of mutants in the cluster it represents.
+The weighed mutation score is then comparable to the score of a full set as the total number of mutants will be the same.
+\newline
+For example, take a full set with a score of 75/100 killed mutants. \todo{example too much?}
+This gives us a mutation score of 75\%. 
+We then cluster the mutants in four clusters consisting of 12, 30, 38 and 20 mutants, respectively.
+We randomly select four mutants of each cluster and execute them.
+The mutants representing cluster one and four survive.
+If we calculate the weighed score we get 68/100 which is 68\%.
+We can then compare this to the score of a full set because the amount of mutants executed is the same: 75/100(75\%) and 68/100(68\%).
+
+
+\subsection{PIT plugin system}
+PIT offers a plugin system in which developers can inject their own functionality in PIT\cite{pitestPlugin}. 
+There are two main types of plugins; a Mutation Result Listener and a Mutation interceptor\cite{pitestPlugin}.
+A mutation result listener  receives the details of analysed mutations as they arrive\cite{pitestPlugin}.
+A Mutation interceptor passed a complete list of all mutation that will be generated to each class before the mutation are challenged by tests\cite{pitestPlugin}.
+The implementation of our experiment makes use of this plugins system.
+\newline
+We developed three separate plugins for our experiment.
+The first plugin is a Mutation interceptor.
+It analyses each mutant, calculates the Levenshtein distance and writes a mutant identifier and distance to a \acrshort{csv} file. 
+It also clears the list of mutants provided by PIT to prevent execution. 
+The second plugin is also a Mutation interceptor.
+It reads the clustered mutants from a \acrshort{csv} file and compares them to the list of mutants provided by PIT.
+Only the clustered mutants are passed back to PIT for execution.
+The last plugin is a mutation result listener. 
+This plugin calculates the weighed mutation score and outputs it to a text file.
+\newline
+The plugins in PIT are executed based on type and per source class.
+This means that a plugin will never receive all the mutants generated for a whole project during execution.
+Because of how PIT executes its plugins we have to execute PIT twice.
+In the first run we calculate the Levenshtein distance for all mutants and in the second run we execute the selected mutants and calculate the weighed mutation score.
+\end{document}

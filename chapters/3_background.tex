@@ -11,13 +11,13 @@ Next, we will compare existing mutation testing tools. We start of by reviewing 
 \todo{levensteihn distance}
 \todo{maven and gradle}
 \section{Project selection}
-We chose two main requirements for selecting software projects; the projects should have a test suite and the test suite should not contain failing tests.
-We started out by selecting projects that were also used in other research within the mutation testing and testing domain\cite{Pizzoleto2019,Yu2019PossibilityScope,Wei2021SpectralTesting, Zhang2019PredictiveTesting, Chen2018SpeedingStudy, Laurent2017AssessingPIT}.
-This resulted in six projects that satisfied the requirements.
-To extend our sample of projects we selected projects from the first six pages of the most popular Java projects on GitHub\footnote{\url{https://github.com/search?p=7&q=language\%3Ajava+stars\%3A\%3E10000&type=Repositories}}.
-From this selection we filtered out all the projects that contained failing tests that weren't libraries or applications.
-We ended up with a total sample of 21 projects. \todo{update this number to actual projects used}
-These projects consists of Java libraries, Android libraries and Java applications.
+We choose three main requirements for selecting software projects; the projects should have a test suite, the test suite should not contain failing tests and the mutation testing tool should be able to execute mutants for the sample project.
+We selected projects that were also used in other research within the mutation testing and testing domain\cite{Pizzoleto2019,Yu2019PossibilityScope,Wei2021SpectralTesting, Zhang2019PredictiveTesting, Chen2018SpeedingStudy, Laurent2017AssessingPIT}.
+We extend our sample by selecting projects from the first six pages of the most popular Java projects on GitHub\footnote{\url{https://github.com/search?p=7&q=language\%3Ajava+stars\%3A\%3E10000&type=Repositories}}.
+The unfiltered sample contains 50+ projects.
+From there we filter out all the projects that contain failing tests and that aren't libraries or applications.
+The result consists of a sample with sixteen projects in total.
+
 
 \section{Clustering algorithms}
 This research focuses on clustering mutants and use of existing clustering algorithms. 
