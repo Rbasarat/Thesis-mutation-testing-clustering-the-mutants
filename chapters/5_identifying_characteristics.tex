@@ -5,13 +5,14 @@
 \label{ch:clustering_characteristics}
 Our goal is to cluster mutants based on characteristics. 
 To achieve this we need to identify characteristics that the mutants contain. 
-In this chapter we identify characteristics which we can use for clustering. 
+In this chapter we identify characteristics that are relevant for defining clusters. 
 
 \section{Overview of characteristics}
 Zhang et al., identifies several mutant characteristics\cite{Zhang2019PredictiveTesting}. 
 Their research focuses on detecting if a mutant survives or not before executing the mutant.
+The mutant characteristics identified by Zhang et al., have been used in other research with promising results\cite{Oonk2021}.
 While the goal of their research is different than ours, we can still use the characteristics they identified.
-We select characteristics relevant to our research from the research of Zhang et al.
+We select characteristics relevant to our research from the research of Zhang et al and Oonk.
 We extend the list of characteristics with data we can extract from our selected mutation testing tool. 
 \newline
 PIT generates and executes mutants on byte code level\cite{pitestBytecode}.
@@ -28,12 +29,10 @@ With the combination of information extracted from PIT and characteristics selec
     \item Mutant contains local variables.
     \item Mutant is in try catch block.
     \item Mutant is in finally block.
-    \item Number of mutated byte code instructions.
     \item Name of class that contains the mutant.
     \item Name of function that contains the mutant.
-    \item Line number of block that contains the mutant.
+    \item Line number of the start of the block that contains the mutant.
     \item Line number on which the mutation occur.
-    \item Number of lines of byte code of mutated class.
 \end{enumerate}
 In the following subsections we will elaborate more on these characteristics.
 
@@ -49,6 +48,10 @@ There are existing similarities measures that base their similarity in different
 We select the Levenshtein distance as similarity measure for our research\cite{Gomma2013AApproaches}.
 The Levenshtein distance defines the distance between two strings by counting the minimum number of operations(create/edit/delete) needed to transform one string into the other\cite{Gomma2013AApproaches}.
 The more the textual representation of a mutant differs from its parent the bigger the Levenshtein distance will be.
+A unit test tests a small piece of code.
+If this piece of codes differs too much from what is being tested the test is more likely fail. 
+The Levenshtein distance measures this difference.
+This could be a useful characteristic because mutants that have the same similarity could be grouped together.
 
 \section{Amount of tests challenged by mutant}
 A mutant may be challenged by tests.
@@ -57,6 +60,8 @@ If the test passes, the mutant is considered survived.
 If the mutant is not challenged by any tests it is also considered survived.
 The amount of tests a mutant is challenged by is dependant on the coverage and test effectiveness of the test suite.
 We identify this number as a characteristic.
+Every test the mutant is challenged by is an occasion for the mutant to be killed or not.
+This could be a useful characteristic because mutants that have more chances to be killed could be grouped together.
 
 \section{Mutator identifier}
 At the time of writing the selected mutation testing tool PIT supports more than 100 mutators\cite{pitestMutators}.
@@ -65,6 +70,7 @@ Each mutator mutates the source code in a dfferent way.
 PIT assigns identifiers to their mutators for execution and reporting purposes. 
 Each mutant has a mutator identifier that matches with how the mutant is mutated from the source code.
 We can extract this data from PIT and use it as a characteristic.
+It could be a useful characteristic because mutants that are changed in the same predefined way could be grouped together.
 
 \section{Mutant opcode}
 \say{A Java Virtual Machine instruction consists of a one-byte opcode specifying the operation to be performed, followed by zero or more operands supplying arguments or data that are used by the operation.} (Java 12 SE docs ch.12).
@@ -73,6 +79,7 @@ A record of which opcode is being used is stored in memory during the mutation t
 This opcode can differ per mutator and is dependant on how the code is written.
 During the mutation testing process of PIT we can extract the opcode.
 We identify the opcode as a characteristic.
+The opcode could be a useful characteristic because mutants with the same opcode may be grouped together.
 
 \section{Mutant return type}
 A mutant may contain a return statement. 
@@ -80,8 +87,10 @@ This is dependant on the source code that is mutated.
 A return statement can be identified as a characteristic.
 If a mutant contains a return statement, we can extract its type from PIT.
 There is the possibility that a mutant does not contain a return statement, in this case we will set the mutant return type to a default value.
+The return type is a distinctive property of a piece of code, this distinction a useful characteristic because mutants with the same return type may be grouped together.
 
-\section{Mutant location}
+
+\section{Mutant location}\label{ch:characteristics_location}
 The location of a mutant in PIT is defined by multiple properties;
 the name of the class, the name of the function, the line number of the start of the block the mutant is located in and the line number the mutation occurs on.
 These properties refer to the location in Java byte code.
@@ -89,14 +98,28 @@ The location can be identified as a characteristic of a mutant.
 PIT uses this location in the mutation testing and reporting processes.
 We can extract the location as defined by the properties in PIT.
 Each property is identified as a characters
+The location of a piece of code is a distinctive property. 
+The same piece of code in a different location may have a different effect on the source code or unit tests.
+A mutant may not be unique if the location is not taken into account.
+It could be a useful characteristic because mutants that are in the same location may be grouped together.
 
-\section{Extracting characteristics}
-PIT exposes some of the characteristics with its plugin system.
-Unfortunately not all characteristics are readily available for extraction.
-To extract all the characteristics from PIT we create a modified version of the application.
-We adjust the existing code to export the characteristics per mutant in various stages of the mutation testing process.
-We create a new model that stores the listed characteristics trough out the mutation testing process. 
-The data can be written to a file during the reporting stage of the process. 
+\section{Error handling capability}
+A technique to handle errors in Java is to use try-catch blocks\cite{javaDocs}. 
+The presence of try-catch blocks are an indication of the error handling capabilities of certain pieces of code.
+An addition to the try-catch blocks are finally blocks.
+A finally block is executed after a try and/or catch block\cite{javaDocs}.
+There is a possibility that a mutant may be generated inside these blocks.
+If a mutant is located in a try, catch or finally block can be defined as a characteristic.
+It could be a useful characteristic because the mutants that are located in the same type of block may be grouped together.
+
+\section{Local variables}
+A mutant may be located in a location(see Chapter \ref{ch:characteristics_location}) that may contain local variables.
+There is a chance a mutant modifies a local variable.
+A variable modified by a mutant increases the chance for a mutant to be killed.
+This is because a unit test may check for a specific value for a specific local variable.
+The amount of local variables a location contains can be identified as a characteristic.
+We can extract the amount of local variables a location contains from PIT.
+This could be a useful characteristic as mutants with the same amount of local variables may be grouped together.
 
 
 \end{document}
