@@ -1,9 +1,9 @@
 \documentclass[../main]{subfiles}
 \begin{document}
-\chapter{Experiment design rq1}\todo{discuss how to split this with exp design for rq2}
+\section{Experiment design}\todo{discuss how to split this with exp design for rq2}
 In this chapter we will design an experiment to answer our first research question.
-We hypothesise that we can cluster mutants with the identified set of characteristics 
-while maintaining effectiveness when executing one mutant from each cluster that is in the majority of that cluster.
+We hypothesise that we can cluster mutants with the set of characteristics we identified
+while maintaining effectiveness and reducing the amount executed when executing one mutant from each cluster that is in the majority of that cluster.
 If a cluster contains ten mutants with eight mutants killed and two mutants survived, all the mutants that are killed are in the majority of that cluster.
 Our goal is to achieve a mutation score that is as close as possible to the mutation score of a full set of executed mutants.
 \newline
@@ -11,7 +11,7 @@ We will start with extracting the characteristics from the selected mutation tes
 Next we select and implement a clustering algorithm for which we can cluster mutants.
 We can then cluster the mutants and compare the results of the clusters with the results of the mutants. 
 
-\section{Extracting characteristics}
+\subsection{Extracting characteristics}
 To extract all the characteristics we identified we need to run PIT and configure it to generate all mutants that are possible within the tool. 
 PIT works in phases, the first phase is the generation phase where mutants are generated.
 The second phase is the execution phase where mutants are challenged by the test suite.
@@ -46,9 +46,11 @@ We store this data together with the identifier to a different \acrshort{csv} fi
 When the mutation testing process has finished we need to merge the characteristic gathered in the second plugin.
 We add the characteristic; the number of tests the mutant is challenged by to the data file containing all the other characteristics.
 We can merge the data because both files contain the same unique identifier per mutant.
+We do not add the information about the survival of a mutant.
+This is data we need to validate our results. 
 
 
-\section{Levenshtein distance on Java byte code}
+\subsection{Levenshtein distance on Java byte code}
 A mutant is a piece of code that differs in a predefined way from its parent.
 Java source code compiles into Java byte code.
 During the compilation of Java code certain context is abstracted away\cite{byteCodeEngineering}.
@@ -64,12 +66,18 @@ By calculating the distance on byte code we filter out the context that is prese
 This gives us a Levenshtein distance that represents more of the semantic difference, between a mutant and parent, than calculating the distance for Java code.
 
 
-\subsection{Levenshtein distance implementation}
+\subsubsection{Levenshtein distance implementation}
 write here that we use a memory efficient algorithm
 
 
-\section{Hierarchical clustering}\todo{elaborate on why hierarchical clustering}
+\subsection{Hierarchical clustering}\todo{elaborate on why hierarchical clustering}
 Clustering Levenshtein distances has been done before with hierarchical clustering\cite{Rajalingam2011HierarchicalStudy, Gothai2010PerformanceAlgorithms}. 
+Research shows that hierarchical clustering performs better when clustering with at least ten features\cite{Rodriguez2019}.
+It also states that varying the parameters of hierarchical clustering improves the performance compared to that of the default settings of the algorithm\cite{Rodriguez2019}.
+We selected hierarchical clustering to cluster the mutants.
+We have more than ten features and adjust the parameters of the algorithm based on the characteristics in our data set.
+Next we will explain the configuration we use for clustering the mutants. 
+\newline
 Hierarchical clustering is subdivided into agglomerative and divisive. 
 The agglomerative hierarchical technique follows bottom up approach whereas divisive follows top-down approaches.
 Hierarchical clustering uses different metrics which measures the the distance between two clusters and the linkage criteria\cite{Rajalingam2011HierarchicalStudy}. 
@@ -82,10 +90,11 @@ However if the clusters overlap the ward linkage outperforms the complete linkag
 We identify all characteristics per mutant as a separate cluster.
 Starting out with each mutant as a separate cluster we can use the agglomerative form of hierarchical clustering.
 Since we cannot assume that our clusters are well separated we chose to use the ward linkage method for our clustering algorithm.
-The agglormorative hierarchical clustering algorithm with ward linkage will cluster our mutants represented as Levenshtein distances.
+The agglormorative hierarchical clustering algorithm with ward linkage will cluster our mutants represented by the characteristics we gathered.
 \todo{write about implementation}
 
-\section{Weighed mutation score}
+\subsection{Weighed mutation score}
+\label{ch:weighed_score}
 Our hypothesis states that each mutants executed should be in the majority of mutants in its cluster. 
 With a mutant executed from each cluster we can calculate a mutation score.
 This mutation score is a weighed mutation score.
@@ -95,11 +104,52 @@ The weighed mutation score is then comparable to the score of a full set as the 
 For example, take a full set with a score of 75/100 killed mutants. \todo{example too much?}
 This gives us a mutation score of 75\%. 
 We then cluster the mutants in four clusters consisting of 12, 30, 38 and 20 mutants, respectively.
-We randomly select four mutants of each cluster and execute them.
-The mutants representing cluster one and four survive.
+We select four mutants of each cluster that are in the majority and execute them.
+The mutants representing cluster one and four survive and two and three are killed.
 If we calculate the weighed score we get 68/100 which is 68\%.
 We can then compare this to the score of a full set because the amount of mutants executed is the same: 75/100(75\%) and 68/100(68\%).
 
+\subsection{Categorical data}
+The hierarchical clustering algorithm needs all characteristics in a numerical form\cite{Vijaya2019ComparativeClustering}.
+The characteristics mutator identifier, class name, method name and return type are non numerical.
+To deal with this problem we need to apply categorical variable encoding to these specific features.
+There are different categorical variable encoding techniques available\cite{Potdar2017AClassifiers}.
+The categorical characteristics we use have no particular ranking compared to each other.
+There is also no specific order to the characteristics.
+I.e. a return type void is not better or worse than a return type string.
+The same goes for the location characteristics, there is no location that should weigh more during the clustering than the other locations.
+The individual characteristics do contain a finite set of values.
+For example multiple mutants may contain the same class name.
+Taking into account the properties of our categorical characteristics we chose to use a nominal variable encoding.
+Nominal encoding comprises a finite set of discrete values with no relationship between values\cite{Potdar2017AClassifiers}.
 
+\subsection{Cluster size}
+We decide our cluster size based on the amount of mutants generated in a full set.
+As a baseline we will reduce the amount of mutants by 75\%, 50\% and 25\%.
+This results in a cluster size that will be equal to 75\%, 50\% and 25\% of the total amount of mutants generated in a full set.
+The amount of mutants inside a cluster will be decided by the clustering algorithm.
 
+\subsection{Validation}
+The most efficient way to measure test effectiveness with mutation testing is by running all mutants that a tool can possibly generate.
+The goal of this experiment is to reduce the amount of mutants executed while maintaining effectiveness.
+To reduce the amounts executed we cluster the mutants. 
+We can measure this by counting the amount of clusters we generate and compare it to the number of total mutants generated by the selected tool.
+\newline
+The baseline for our experiment is the mutation score of the set of all mutants generated by our selected mutation testing tool.
+\newline
+To validate how effective our clustering is we can compare the weighed mutation score(see Chapter \ref{ch:weighed_score}) of our clustered set to the mutation score of the full set.
+The closer the weighed score is to that of a full set the more effective our set of characteristics and clustering algorithm proves to be.
+In other words we want achieve a mutation score that is as close as possible as to that of a full set.
+We select a significance level of $\leq 0.05$.
+This is the conventional threshold for declaring statistical significance\cite{Kirk1996PracticalCome}.
+\newline
+Depending on the effectiveness of our clustering algorithm we may loose accuracy.
+This can happen if a cluster contains mutants both types. 
+We can measure this accuracy by calculating a percentage of all mutants that have survived against the ones that have been killed in a cluster.
+If the majority of the mutants in a cluster is killed then we consider that cluster to represent a killed cluster and the other way around for survived mutants.
+We consider the mutants that are not in the majority of the cluster as inaccuracy.
+\newline
+To decide if we accept or reject our hypothesis we use statistical significance\cite{Kirk1996PracticalCome}.
+If the weighed mutation score of our clustered set deviates more than 5\% from the score of a full set we will reject our hypothesis.
+We also compare the inaccuracy to the significance level to decide if our inaccuracy is statistical significant.
 \end{document}
