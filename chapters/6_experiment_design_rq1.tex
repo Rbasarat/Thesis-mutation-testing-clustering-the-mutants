@@ -1,10 +1,11 @@
 \documentclass[../main]{subfiles}
 \begin{document}
-\section{Experiment design}\todo{discuss how to split this with exp design for rq2}
+% Because we use sections but these sections should be interpreted as chapters for rq1 and rq2 sectioning.
+\clearpage
+\section{Experiment design}
 In this chapter we will design an experiment to answer our first research question.
 We hypothesise that we can cluster mutants with the set of characteristics we identified
-while maintaining effectiveness and reducing the amount executed when executing one mutant from each cluster that is in the majority of that cluster.
-If a cluster contains ten mutants with eight mutants killed and two mutants survived, all the mutants that are killed are in the majority of that cluster.
+while maintaining effectiveness and reducing the amount executed when executing one mutant from each cluster that is randomly selected.
 Our goal is to achieve a mutation score that is as close as possible to the mutation score of a full set of executed mutants.
 \newline
 We will start with extracting the characteristics from the selected mutation testing tool. 
@@ -66,16 +67,23 @@ By calculating the distance on byte code we filter out the context that is prese
 This gives us a Levenshtein distance that represents more of the semantic difference, between a mutant and parent, than calculating the distance for Java code.
 
 
-\subsubsection{Levenshtein distance implementation}
-write here that we use a memory efficient algorithm
+\subsection{Levenshtein distance implementation}
+There are different implementations of the Levensthein distance.
+For our experiment we need to calculate the Levenshtein distance on the byte code generated in PIT.
+Since we make use of the plugin system it was natural to use an implementation that was written in Java.
+The Levenshtein distance can be calculated in different ways for example with recursion.
+The implementation with recursion is has a complexity of O(N\^{}2) and a memory need of O(N\^{}2).
+There is also an improved implementation that does not use recursion.
+While the complexity is the same the memory need is reduced to O(N).
+This last implementation is the implementation we selected for our experiment.
 
 
-\subsection{Hierarchical clustering}\todo{elaborate on why hierarchical clustering}
+\subsection{Hierarchical clustering}
 Clustering Levenshtein distances has been done before with hierarchical clustering\cite{Rajalingam2011HierarchicalStudy, Gothai2010PerformanceAlgorithms}. 
 Research shows that hierarchical clustering performs better when clustering with at least ten features\cite{Rodriguez2019}.
 It also states that varying the parameters of hierarchical clustering improves the performance compared to that of the default settings of the algorithm\cite{Rodriguez2019}.
 We selected hierarchical clustering to cluster the mutants.
-We have more than ten features and adjust the parameters of the algorithm based on the characteristics in our data set.
+We have more than ten characteristics which we can use as features and adjust the parameters of the algorithm based on the characteristics in our data set.
 Next we will explain the configuration we use for clustering the mutants. 
 \newline
 Hierarchical clustering is subdivided into agglomerative and divisive. 
@@ -91,11 +99,11 @@ We identify all characteristics per mutant as a separate cluster.
 Starting out with each mutant as a separate cluster we can use the agglomerative form of hierarchical clustering.
 Since we cannot assume that our clusters are well separated we chose to use the ward linkage method for our clustering algorithm.
 The agglormorative hierarchical clustering algorithm with ward linkage will cluster our mutants represented by the characteristics we gathered.
-\todo{write about implementation}
+
 
 \subsection{Weighed mutation score}
 \label{ch:weighed_score}
-Our hypothesis states that each mutants executed should be in the majority of mutants in its cluster. 
+Our hypothesis states that each mutants executed should represent that whole cluster.
 With a mutant executed from each cluster we can calculate a mutation score.
 This mutation score is a weighed mutation score.
 This weighed mutation score is the product of the result of a mutant(1 for killed and 0 for survived) and the amount of mutants in the cluster it represents.
@@ -104,7 +112,7 @@ The weighed mutation score is then comparable to the score of a full set as the 
 For example, take a full set with a score of 75/100 killed mutants. \todo{example too much?}
 This gives us a mutation score of 75\%. 
 We then cluster the mutants in four clusters consisting of 12, 30, 38 and 20 mutants, respectively.
-We select four mutants of each cluster that are in the majority and execute them.
+We randomly select four mutants of each cluster and execute them.
 The mutants representing cluster one and four survive and two and three are killed.
 If we calculate the weighed score we get 68/100 which is 68\%.
 We can then compare this to the score of a full set because the amount of mutants executed is the same: 75/100(75\%) and 68/100(68\%).
