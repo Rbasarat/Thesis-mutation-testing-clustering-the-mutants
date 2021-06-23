@@ -160,4 +160,12 @@ We consider the mutants that are not in the majority of the cluster as inaccurac
 To decide if we accept or reject our hypothesis we use statistical significance\cite{Kirk1996PracticalCome}.
 If the weighed mutation score of our clustered set deviates more than 5\% from the score of a full set we will reject our hypothesis.
 We also compare the inaccuracy to the significance level to decide if our inaccuracy is statistical significant.
+
+\subsection{Mutant selection}
+As stated in our hypothesis we will randomly select a mutant from each cluster to be executed.
+To make our results reproducible we will select a random mutant based on a generated seed.
+The seed generated for each run will be included in the results and can be found in the Github repository\cite{rbasarat-repo}.
+Achieving consistent results while applying random selection will contribute to the validity of the experiment.
+We will use the same statistical significance threshold to decide if the variation by the random sampling is acceptable or not.
+
 \end{document}
