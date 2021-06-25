@@ -4,24 +4,69 @@
 \clearpage
 \section{Experiment design}
 In this chapter we will design an experiment to answer our second research question.
-We hypothesise that we train a machine learning model with the set of characteristics we identified
+We hypothesise that we can train a machine learning model with the set of characteristics we identified
 while maintaining effectiveness and reducing the amount executed when executing one mutant from each cluster that is randomly selected.
 Our goal is to achieve a mutation score that is as close as possible to the mutation score of a full set of executed mutants.
 \newline
 \todo{finish this}
 
 \subsection{Selecting a machine learning model}
-Our starting point for selecting a machine learning model is the survey done by K.L. Du\cite{Du2010Clustering:Approach}.
-We start with a process of elimination to filter the machine learning models named in chapter \ref{ch:background}.
+The first choice we have to make on selecting a machine learning model is to decide on supervised or unsupervised learning.
+The application and description of these two types of learning are described in Chapter \ref{ch:background}.
+Supervised machine learning models require a labeled data set.
+Our data set consists of mutants represented by the characteristics identified in Chapter \ref{ch:clustering_characteristics}.
+This data set is unlabeled as it does not map the mutants to categories.
+We also do now know what the categories would be or how to map a mutant to a specific category.
+Instead of manually evaluating each mutant and identifying categories to map them to we can train a machine learning model to do this for us.
+To do this we need an unsupervised machine learning model.
 \newline
-supervised learning\todo{elaborate why no supervised}
-\newline
-The moutain clustering model is effective method for estimating the number of clusters\cite{Du2010Clustering:Approach}. 
-The goal of this experiment is to cluster mutants, while finding out the number of clusters we need might be valuable it is not what we want to achieve. Therefore we will not select mountain clustering.
-Subtractive clustering is a modified form of mountain c\cite{Du2010Clustering:Approach}. 
-\newline
+Our starting point for selecting an unsupervised machine learning model are the models discussed in the survey done by K.L. Du\cite{Du2010Clustering:Approach}.
+We will select a model by a process of elimination.
 
-\subsection{Training method}
+\subsubsection{Mountain model}
+The mountain clustering model is an effective method for estimating the number of clusters\cite{Du2010Clustering:Approach}. 
+While finding out the number of clusters we need might be valuable it is not what we want to achieve. 
+Therefore we will not select mountain clustering.
+
+\subsubsection{ART models}
+ART models are characterized by systems of differential equations that formulate stable self-organizing learning methods\cite{Du2010Clustering:Approach}.
+The stability and plasticity properties as well as the ability to efficiently process dynamic data make the ART attractive for clustering large, rapidly changing sequences of input patterns\cite{Du2010Clustering:Approach}.
+While the ART models are very good at what they do, they do not fit our purpose of clustering mutants.
+As described above the ART models expect rapidly changing sequences of input patterns our data set is not that.
+Therefore we will not select an ART model.
+
+\subsubsection{Neural gas}
+The neural gas is a topology-preserving network, and can be treated as an extension to the C-means\cite{Du2010Clustering:Approach}.
+A data optimal topological ordering is achieved by using neighborhood ranking within the input space at each training step\cite{Du2010Clustering:Approach}.
+To find its neighborhood rank, each neuron compares its distance to the input vector with those of all the other neurons to the input vector\cite{Du2010Clustering:Approach}. 
+Unlike the self organizing map, which uses predefined static neighborhood relations, the neural gas network determines a dynamical neighborhood relation as learning proceeds\cite{Du2010Clustering:Approach}.
+A big pro of the neural gas network is that it is able to spawn neurons.
+This means that we do not need to know the amount of clusters in advance.
+Unfortunately the neural gas network is a learning network.
+One of the properties of a learning network is that it is not designed to fit new data points\cite{supervisedUnsupervised}.
+For this reason we cannot use the neural gas network to predict in what cluster a new mutant should be placed.
+Therefore we will not select the neural gas network.
+
+\subsubsection{Learning vector quantization}
+The learning vector quantization model is a supervised learning model.
+We established that we need an unsupervised learning model to cluster the mutants.
+Therefore we will not select the learning vector quantization model.
+
+\subsubsection{Self organizing map, C-means and fuzzy C-means}
+The self organizing map, C-means and fuzzy C-means models are all models that would fit our purpose. 
+To choose between these models we will look at the performance of each model.
+Mingoti et al., compared the performance of these three models \cite{Mingoti2006ComparingAlgorithms}.
+They did a Monte Carlo simulation where the cluster sizes and amount of random numbers in the data set varied each simulation\cite{Mingoti2006ComparingAlgorithms}.
+Other variables such as cluster boundaries and overlap were also controlled in the experiment.
+They observe that all the C-means and fuzzy C-means had good performance for non overlapping situations\cite{Mingoti2006ComparingAlgorithms}.
+The best results for average recovery and internal dispersion rates were found for Fuzzy C-means which was very stable in all situations achieving recovery averages over 90\%\cite{Mingoti2006ComparingAlgorithms}
+The C-means method was very affected by the presence of a large amount of outliers.
+They conclude that the self organizing map did not perform well in many cases being very affected by the amount of variables and clusters even for the non overlapping cases\cite{Mingoti2006ComparingAlgorithms}.
+They also conclude that their results partially overlap with other research in the same domain.
+\newline
+Based on these results we can conclude that the fuzzy c-means model has the best performance overall.
+For this experiment we will select the fuzzy c-means model.
+\subsection{Training strategy}
 
 \subsection{Validation}
 
