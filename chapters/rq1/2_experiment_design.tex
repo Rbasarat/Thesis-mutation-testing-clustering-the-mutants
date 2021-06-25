@@ -79,7 +79,7 @@ This last implementation is the implementation we selected for our experiment.
 
 
 \subsection{Hierarchical clustering}
-Clustering Levenshtein distances has been done before with hierarchical clustering\cite{Rajalingam2011HierarchicalStudy, Gothai2010PerformanceAlgorithms}. 
+Clustering Levenshtein distances has been done before with hierarchical clustering\cite{Rajalingam2011, Gothai2010PerformanceAlgorithms}. 
 Research shows that hierarchical clustering performs better when clustering with at least ten features\cite{Rodriguez2019}.
 It also states that varying the parameters of hierarchical clustering improves the performance compared to that of the default settings of the algorithm\cite{Rodriguez2019}.
 We selected hierarchical clustering to cluster the mutants.
@@ -88,8 +88,8 @@ Next we will explain the configuration we use for clustering the mutants.
 \newline
 Hierarchical clustering is subdivided into agglomerative and divisive. 
 The agglomerative hierarchical technique follows bottom up approach whereas divisive follows top-down approaches.
-Hierarchical clustering uses different metrics which measures the the distance between two clusters and the linkage criteria\cite{Rajalingam2011HierarchicalStudy}. 
-The linkage criteria specifies the dissimilarity in the sets as a function of the pair-wise distances of observations in those sets\cite{Rajalingam2011HierarchicalStudy}.
+Hierarchical clustering uses different metrics which measures the the distance between two clusters and the linkage criteria\cite{Rajalingam2011}. 
+The linkage criteria specifies the dissimilarity in the sets as a function of the pair-wise distances of observations in those sets\cite{Rajalingam2011}.
 \newline
 Research shows that the complete linkage outperforms the single linkage method\cite{Vijaya2019ComparativeClustering}.
 The ward linkage and complete linkage methods perform the same when clusters are well separated\cite{Vijaya2019ComparativeClustering}.
