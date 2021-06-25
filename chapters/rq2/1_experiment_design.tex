@@ -1,4 +1,4 @@
-\documentclass[../main]{subfiles}
+\documentclass[../../main]{subfiles}
 \begin{document}
 % Because we use sections but these sections should be interpreted as chapters for rq1 and rq2 sectioning.
 \clearpage
@@ -7,9 +7,21 @@ In this chapter we will design an experiment to answer our second research quest
 HYOPTHESIS HERE\todo{do hypothesis}
 Our goal is to achieve a mutation score that is as close as possible to the mutation score of a full set of executed mutants.
 \newline
-\toto{finish this}
+\todo{finish this}
 
 \subsection{Selecting a neural network}
+Our starting point for selecting a neural network is the survey done by K.L. Du\cite{Du2010Clustering:Approach}.
+We start with a process of elimination to filter the neural networks named in chapter \ref{ch:background}.
+\newline
+supervised networkd\todo{elaborate why no supervised}
+\newline
+The moutain clustering networks is effective method for estimating the number of clusters\cite{Du2010Clustering:Approach}. 
+The goal of this experiment is to cluster mutants, while finding out the number of clusters we need might be valuable it is not what we want to achieve. Therefore we will not select mountain clustering.
+Subtractive clustering is a modified form of mountain c\cite{Du2010Clustering:Approach}. 
+\newline
 
+\subsection{Training method}
+
+\subsection{Validation}
 
 \end{document}
