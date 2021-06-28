@@ -32,7 +32,7 @@ Therefore we will not select mountain clustering.
 ART models are characterized by systems of differential equations that formulate stable self-organizing learning methods\cite{Du2010Clustering:Approach}.
 The stability and plasticity properties as well as the ability to efficiently process dynamic data make the ART attractive for clustering large, rapidly changing sequences of input patterns\cite{Du2010Clustering:Approach}.
 While the ART models are very good at what they do, they do not fit our purpose of clustering mutants.
-As described above the ART models expect rapidly changing sequences of input patterns our data set is not that.
+As described above the ART models expect rapidly changing sequences of input patterns, our data set does not constists of this kind of data.
 Therefore we will not select an ART model.
 
 \subsubsection{Neural gas}
@@ -65,8 +65,32 @@ They conclude that the self organizing map did not perform well in many cases be
 They also conclude that their results partially overlap with other research in the same domain.
 \newline
 Based on these results we can conclude that the fuzzy c-means model has the best performance overall.
-For this experiment we will select the fuzzy c-means model.
+For this experiment we select the fuzzy c-means model.
+
 \subsection{Training strategy}
+Our data set contains of mutants represented by their characteristics. 
+The characteristics of the mutants are generated per project and have a project specific context.
+The relations between the different mutants are also specific per project.
+For example mutant with a mutator in a certain project can have a different effect on the source code and can give other results than a mutator in a different project.
+To keep the relations and context we decided to train our model per project.
+\newline
+To validate our model we need to split our data set into a training set and a validation set.
+Our total data set consists of approximately 1 million mutants generated over fourteen projects.
+Research has shown that if the data set is big enough a ratio of 80/20 is sufficient\cite{Guyon1997ARatio}.
+We will divide our projects into training and validation groups to reflect the 80/20 ratio.
+
+\subsection{Implementation of algorithm}
+The origin of the fuzzy c-means algorithm is referenced in the survey paper of Du et al\cite{Du2010Clustering:Approach}.
+The fuzzy c-means algorithm is developed by Bezdek et al.\cite{Bezdek1984FCM:Algorithm}.
+Based on their research an implementation can be developed.
+There are existing libraries that contain the implementation of the fuzzy c-means algorithm.
+Developing our own version of the fuzzy c-means algorithm is out of scope for this research.
+For this reason we choose to use a library that implements the fuzzy c-means algorithm.
+The library we will use for this experiment is the fuzzy c-means implementation build by Dias et al.\cite{dias2019fuzzy}.
+The theory developed by Bezdek et al., is implemented in this library.
+The library has been used in other research\cite{DeAlmeidaNeto2020, Kopf2019, Nwadiugwu2020} and is actively maintained.
+
+\subsection{Algorithm parameters}
 
 \subsection{Validation}
 
