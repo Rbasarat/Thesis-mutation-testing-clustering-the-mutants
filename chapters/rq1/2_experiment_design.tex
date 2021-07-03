@@ -138,6 +138,7 @@ This results in a cluster size that will be equal to 75\%, 50\% and 25\% of the 
 The amount of mutants inside a cluster will be decided by the clustering algorithm.
 
 \subsection{Validation}
+\label{ch:exp1_validation}
 The most efficient way to measure test effectiveness with mutation testing is by running all mutants that a tool can possibly generate.
 The goal of this experiment is to reduce the amount of mutants executed while maintaining effectiveness.
 To reduce the amounts executed we cluster the mutants. 
@@ -157,7 +158,6 @@ We can measure this accuracy by calculating a percentage of all mutants that hav
 If the majority of the mutants in a cluster is killed then we consider that cluster to represent a killed cluster and the other way around for survived mutants.
 We consider the mutants that are not in the majority of the cluster as inaccuracy.
 \newline
-To decide if we accept or reject our hypothesis we use statistical significance\cite{Kirk1996PracticalCome}.
 If the weighed mutation score of our clustered set deviates more than 5\% from the score of a full set we will reject our hypothesis.
 We also compare the inaccuracy to the significance level to decide if our inaccuracy is statistical significant.
 
@@ -165,6 +165,7 @@ We also compare the inaccuracy to the significance level to decide if our inaccu
 As stated in our hypothesis we will randomly select a mutant from each cluster to be executed.
 To make our results reproducible we will select a random mutant based on a generated seed.
 The seed generated for each run will be included in the results and can be found in the Github repository\cite{rbasarat-repo}.
+We will repeat our experiment 30 times with 30 different seeds.
 Achieving consistent results while applying random selection will contribute to the validity of the experiment.
 We will use the same statistical significance threshold to decide if the variation by the random sampling is acceptable or not.
 

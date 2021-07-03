@@ -6,14 +6,19 @@
 \label{ch:results_rq1}
 In this chapter we will present the results of our first experiment.
 We will divide the results in two sections. 
-The first section will display the results of clustering with only similarity as characteristic.
-The second section will display the results of clustering with all characteristics.
+The first section will display the results of clustering with all characteristics.
+The second section will display the results of clustering without the Levensthein distance.
+\newline
+During the the process of extracting the characteristics we found that calculating the Levenshtein distance took a long time.
+Generating the Levenshtein distance for the four biggest projects in the data set took days.
+Including the Levenshtein distance defeats our purpose of increasing the performance as every bit of performance we increase will be replaced by the cost of calculating the Levenshtein distance.
+For this reason we decided to repeat the experiment without the Levensthein distance characteristic.
 \newline
 Due to the limitation of resources and time we had to omit four source projects from these results. 
 The amount of generated mutants for these projects was too large for the available hardware.
 Trying to cluster these mutants this resulted in a out of memory error.
 
-\subsection{Single characteristic}
+\subsection{All characteristics}
 This section will display the results of our clustering algorithm when executed with data that consists of single characteristic. We randomly selected the similarity characteristic. 
 The results will be grouped based on the reduced percentage of mutants executed.
 We will also display the accuracy of the clusters per reduction amount.
