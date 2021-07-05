@@ -90,6 +90,9 @@ Our total data set consists of approximately 1 million mutants generated over fo
 Research has shown that if the data set is big enough a ratio of 80/20 is sufficient\cite{Guyon1997ARatio}.
 We will divide each source projects into training and validation groups to reflect the 80/20 ratio as best as possible.
 Depending on the amount of mutants per project we might not achieve a perfect 80/20 ratio.
+The division of the mutants will be done randomly. 
+To make our results reproducible we will select a random division based on a generated seed.
+The seed generated for each run will be included in the results and can be found in the Github repository\cite{rbasarat-repo}.
 
 \subsection{Implementation of algorithm}
 The research paper of the fuzzy c-means algorithm is referenced in the survey paper of Du et al\cite{Du2010Clustering:Approach}.
@@ -142,5 +145,8 @@ As described in Chapter \ref{ch:training_strategy} the projects should represent
 It may be possible the model has to cluster mutants it has never seen before.
 We will use the same statistical significance threshold as in our firsts experiment to decide whether we will accept or reject or hypothesis.
 To make our results reproducible we will select a random mutant based on a generated seed.
+We will repeat our experiment 30 times with 30 different seeds.
+Achieving consistent results while applying random selection and cluster initialization will contribute to the validity of the experiment.
 The seed generated for each run will be included in the results and can be found in the Github repository\cite{rbasarat-repo}.
+
 \end{document}

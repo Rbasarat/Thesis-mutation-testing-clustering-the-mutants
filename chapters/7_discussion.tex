@@ -5,17 +5,66 @@
 \chapter{Discussion}
 \label{ch:discussion}
 In this chapter, we discuss the results of our experiments on clustering the mutants.
+We will first discuss the results of the first experiment. 
+For the first experiment will discuss the all the results together and compare the results between the variants.
+Secondly we will discuss the results of the second experiment.
+Thirdly we will discuss how the results both experiments compare to each other.
+And last we will discuss the practicality of our research.s
+
+\section{RQ 1: Identifying and clustering mutant characteristics}
+The maximum deviation from the original mutation score, for all variants(with and without Levenshtein distance) of the experiment, are below the statistical 
+As hypothesised we observe that it is possible to cluster mutants with the set of characteristics we identified while maintaining effectiveness and reducing the amount executed.
+The hypothesis holds for all the projects and variants of the experiment.
+Most of the projects had a deviation of less than 1\% for all variations.
 
 \begin{finding}
-	Highlight like this an important finding of your analysis of the results.
-	\label{find:important1}
+    With a reduction up to 75\% of the total amount of mutants we can still maintain effectiveness.
+\end{finding}
+In both variants we observe a reduction in average accuracy when reducing the amount of clusters.
+This reductions is 0.1\% for clustering with all characteristics and 0.04\% for clustering without Levenshtein distance.
+We can also see that the average cluster accuracy is lower when reducing the amount executed.
+\begin{finding}
+    The more you reduce the amount of mutants executed the more accuracy is lost.
+\end{finding}
+The results show that the average accuracy for reductions of 25\% and 50\% is the same.
+This observation shows true for both variants of the experiment which is remarkable.
+\begin{finding}
+    In our data set it is safe to reduce the mutants by half without reducing the accuracy.
+\end{finding}
+It is also remarkable to see the min and max accuracy of the all clusters are 50\% to 100\% respectively.
+Based on these results we can state the following:
+\begin{itemize}
+    \item For every project there was at least one cluster that consisted only of killed or survived mutants.
+    \item For every project there was at least one cluster that evenly divided between killed and survived mutants.
+\end{itemize}
+With the exception of all Google Auto Service and Commons Text with a reduction of 25\% and all characteristics all projects showed an average accuracy above 90\%.
+The combination of hierarchical clustering and the identified characteristics results in high accuracy clusters.
+As logic dictates we expect that a higher accuracy means a score closer to that of the original.
+However we do not observe this behaviour in our results.
+This is due to our random sampling method.
+If we would select a mutant in the majority of each cluster the accuracy per cluster would correlate to the deviation in mutation score.
+Unfortunately we do not know the majority of a cluster as we do now know if a mutant survives or is killed before execution.
+\begin{finding}
+    Random sampling a mutant per cluster may result in a lower mutation score.
+\end{finding}
+As stated in Chapter \ref{ch:results_rq1} the calculation of the Levenshtein distance took a long time.
+For this reason we repeated the experiment without the Levenshtein distance.
+Comparing the results between these variants we can observe a max deviation of 0.05\% between average difference of the mutation score of.
+In 66\% of the results displayed in Chapter \ref{ch:results_rq1} clustering without the Levenshtein distance is more accurate.
+The biggest difference measured between all the projects and their reductions is 2.13\% where of clustering without Levenshtein distance was more accurate.
+\begin{finding}
+    While clustering without the Levenshtein distance was more accurate in our results, the Levenshtein distance characteristic does not significantly increase or decrease the cluster accuracy.
 \end{finding}
 
-Refer to Finding~\ref{find:important1}.
+
+
+
+The application of our research is limited to all software projects written in the language Java and the limitations of our mutation testing tool PIT\cite{pit}.
+This scope is significantly larger than most of the research done in the domain of mutation clustering(Chapter \ref{ch:related_work}).
 
 \section{Threats to validity}
 What could affect the validity of your research? Think of pitfalls of your research method, experimental setup, interpreting the results.
-- pit generated mutants -> it's hard to know if we can cluster ALL posible mutants
+- pit generated mutants -> it's hard to know if we can cluster ALL possible mutants
 - Selected sources
 - equivalent mutants
 
