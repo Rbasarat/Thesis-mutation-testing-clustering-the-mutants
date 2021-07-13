@@ -51,7 +51,7 @@ A data optimal topological ordering is achieved by using neighborhood ranking wi
 To find its neighborhood rank, each neuron compares its distance to the input vector with those of all the other neurons to the input vector\cite{Du2010Clustering:Approach}. 
 Unlike the self organizing map, which uses predefined static neighborhood relations, the neural gas network determines a dynamical neighborhood relation as learning proceeds\cite{Du2010Clustering:Approach}.
 A big pro of the neural gas network is that it is able to spawn neurons.
-This means that we do not need to know the amount of clusters in advance.
+This means that we do not need to know the number of clusters in advance.
 Unfortunately the neural gas network is a learning network.
 One of the properties of a learning network is that it is not designed to fit new data points\cite{supervisedUnsupervised}.
 For this reason we cannot use the neural gas network to predict in what cluster a new mutant should be placed.
@@ -124,13 +124,13 @@ Since our data set does not contain noise and outliers we choose to select the m
 The value of \textit{m} in this experiment is 2.
 \newline
 Finding the correct amount of clusters has been an ongoing problem for clustering algorithms\cite{Du2010Clustering:Approach}.
-Fortunately there are some techniques available to estimate the cluster amount.
+Fortunately there are some techniques available to estimate the number of clusters.
 During model selection we discussed the mountain and subtractive models. 
-These models are designed to estimate the amount of clusters in a data set.
+These models are designed to estimate the number of clusters in a data set.
 The subtractive clustering model is specifically designed to approximate the number of clusters for fuzzy system models\cite{Chiu1994FuzzyEstimation}.
 It approximates the centroids and amount of the clusters based on the data points in the data set\cite{Chiu1994FuzzyEstimation}.
-We will select and implement the subtractive clustering model to estimate the amount of clusters.
-We can use this amount for the cluster amount parameter in the fuzzy c-means algorithm.
+We will select and implement the subtractive clustering model to estimate the number of clusters.
+We can use this number for the number of clusters parameter in the fuzzy c-means algorithm.
 
 \subsection{Implementation of subtractive clustering}
 The research paper of the mountain and subtractive algorithms are referenced in the survey paper of Du et al\cite{Du2010Clustering:Approach}.
