@@ -4,16 +4,23 @@
 \chapter{Background}
 \label{ch:background}
 This chapter will present the necessary background information for this thesis. First, we define some basic terminology that will be used throughout this thesis.
-Next, we will compare existing mutation testing tools. We start of by reviewing existing literature and then extend the comparison. \todo{extend this later on?}
+Next, we will compare existing mutation testing tools. We start of by reviewing existing literature and then extend the comparison. 
+This thesis relies on clustering techniques.
+We review the state of the art on clustering algorithms and secondly the state of the art on machine learning models specialized in clustering.
+
 \section{Terminology}
-\todo{do this when we finished experiments and all}
-\todo{subsuming mutants}
-\todo{levenshtein distance}
-\todo{maven and gradle}
+Subsuming mutants.
+Mutation testing.
+Levenshtein distance.
+Maven.
+Gradle.
+Mutator.
+test engine??
 \section{Project selection}
 \label{ch:project_selection}
 We choose three main requirements for selecting software projects; the projects should have a test suite, the test suite should not contain failing tests and the mutation testing tool should be able to execute mutants for the sample project.
 We selected projects that were also used in other research within the mutation testing and testing domain\cite{Pizzoleto2019,Yu2019PossibilityScope,Wei2021SpectralTesting, Zhang2019PredictiveTesting, Chen2018SpeedingStudy, Laurent2017AssessingPIT}.
+\newline
 We extend our sample by selecting projects from the first six pages of the most popular Java projects on GitHub\footnote{\url{https://github.com/search?p=7&q=language\%3Ajava+stars\%3A\%3E10000&type=Repositories}}.
 The unfiltered sample contains 50+ projects.
 From there we filter out all the projects that contain failing tests and that aren't libraries or applications.
@@ -42,7 +49,7 @@ They used 400 generated artificial data sets which were normally distributed.
 The results reported in their research are respective to specific configurations of normally distributed data and algorithmic implementations.
 Nonetheless they do give a good overview on how the algorithms compare to each other.
 \newline
-For the default parameter situation the spectral clustering algorithm had the best performance and the hierarchical algorithm had the worst performance.
+For the default parameter experiment, the spectral clustering algorithm had the best performance and the hierarchical algorithm had the worst performance.
 \newline
 Regarding single parameter variations, for data sets containing 2 columns, the hierarchical, optics and EM methods showed significant performance variation.
 \newline
@@ -64,7 +71,7 @@ Unsupervised learning is a type of algorithm that learns patterns from untagged 
 These machine learning algorithms are commonly used for clustering and dimensionality reduction\cite{supervisedUnsupervised}.
 \newline
 K.L. Du surveyed different machine learning models used for clustering\cite{Du2010Clustering:Approach}.
-The models he discusses are:
+Relevant models he discusses are:
 \begin{itemize}
     \item Self organizing map.
     \item Learning vector quantization.
