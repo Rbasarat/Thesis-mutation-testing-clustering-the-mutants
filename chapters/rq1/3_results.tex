@@ -10,20 +10,20 @@ The first section will display the results of clustering with all characteristic
 The second section will display the results of clustering without the Levensthein distance.
 \newline
 During the the process of extracting the characteristics we found that calculating the Levenshtein distance took a long time.
-Generating the Levenshtein distance for the four biggest projects in the data set took days.
+Calculating the Levenshtein distance for the four biggest projects in the data set cost days.
 Even for the smaller projects it increased extraction of the characteristics by hours.
-Including the Levenshtein distance defeats our purpose of increasing the performance as every bit of performance we increase will be replaced by the cost of calculating the Levenshtein distance.
+Including the Levenshtein distance defeats the purpose of increasing the performance as every bit of performance we increase will be replaced by the cost of calculating the Levenshtein distance.
 For this reason we decided to repeat the experiment without the Levensthein distance characteristic.
 \newline
 Due to the limitation of resources and time we had to omit four source projects from these results. 
-The amount of generated mutants for these projects was too large for the available hardware.
+The memory needed to store the amount of generated mutants for these projects was too much for the available hardware.
 Trying to cluster these mutants this resulted in a out of memory error.
 \newline
 The results displayed are the average of the results of the 30 repetitions of the experiment.
 The result of each single repetition can be found in our Github repository\cite{rbasarat-repo}.
 
 \subsection{Clustering with all characteristics}
-This section will display the results of our clustering algorithm when executed with data that consists of single characteristic. We randomly selected the similarity characteristic. 
+This section will display the results of our clustering algorithm when executed with data that consists of all characteristics. We randomly selected the similarity characteristic. 
 The results will be grouped based on the reduced percentage of mutants executed.
 We will also display the accuracy of the clusters per reduction amount.
 \begin{table}[!htb]
@@ -47,11 +47,11 @@ commons-csv                   & 85.16\%                                         
 \end{table}
 \FloatBarrier
 
-Table \ref{tab:clustering_all_25} displays the results of clustering mutants with a single characteristic and the number of clusters equal to the total amount of mutants* 0.25.  
+Table \ref{tab:clustering_all_25} displays the results of clustering mutants with all characteristics and the number of clusters equal to the total amount of mutants* 0.25.  
 The maximum and minimum differences between the score of a full set and clustered are is 3.52\% and 0.04\% respectively.  
 The average of the differences between full set score and clustered score is 0.58\%.
 It is also noticeable that the minimum and maximum accuracy are 50\% and 100\% respectively.
-This means that there was at least one cluster that consisted of only mutants that are killed or survived.
+This means that there was at least one cluster that consisted of only mutants that were killed or survived.
 The minimum accuracy cannot go below 50\%.
 If the percentage does go below 50\% the representation of a cluster will flip from survived to killed or the other way around.
 
@@ -75,7 +75,7 @@ commons-csv                   & 85.16\%                                         
 \end{table}
 \FloatBarrier
 
-Table \ref{tab:clustering_all_50} displays the results of clustering mutants with a single characteristic and the number of clusters equal to the total amount of mutants* 0.50.  
+Table \ref{tab:clustering_all_50} displays the results of clustering mutants with all characteristics and the number of clusters equal to the total amount of mutants* 0.50.  
 The maximum and minimum differences between the score of a full set and clustered set are 3.63\% and 0.02\% respectively.
 The average of the differences between full set score and clustered score is 0.48\% which is smaller than the average difference than that of the 25\% set.
 
@@ -99,7 +99,7 @@ commons-csv                   & 85.16\%                                         
 \end{table}
 \FloatBarrier
 
-Table \ref{tab:clustering_all_75} displays the results of clustering mutants with a single characteristic and the number of clusters equal to the total amount of mutants* 0.75.  
+Table \ref{tab:clustering_all_75} displays the results of clustering mutants with all characteristics and the number of clusters equal to the total amount of mutants* 0.75.  
 The maximum and minimum differences between the score of a full set and clustered set are 3.63\% and 0\% respectively.  
 The average of the differences between full set score and clustered score is 0.48\% which is higher than the average difference than that of the 25\% and the same of that of the 50\% set.
 
@@ -127,7 +127,7 @@ commons-csv                   & 85.16\%                                         
 \end{table}
 \FloatBarrier
 
-Table \ref{tab:clustering_no_distance_25} displays the results of clustering mutants with all characteristics and the number of clusters equal to the total amount of mutants * 0.25. 
+Table \ref{tab:clustering_no_distance_25} displays the results of clustering mutants without Levensthein distance and the number of clusters equal to the total amount of mutants * 0.25. 
 We observe that the maximum and minimum differences in mutation score between a full set and a clustered set  3.61\% and 0.09\% respectively.
 The average of the differences between full set score and clustered score is 0.53\%.
 
@@ -151,7 +151,7 @@ commons-csv                   & 85.16\%                                         
 \end{table}
 \FloatBarrier
 
-Table \ref{tab:clustering_no_distance_50} displays the results of clustering mutants with all characteristics and the number of clusters equal to the total amount of mutants * 0.50.
+Table \ref{tab:clustering_no_distance_50} displays the results of clustering mutants without Levensthein distance and the number of clusters equal to the total amount of mutants * 0.50.
 The maximum and minimum differences between the score of a full set and clustered set are 3.65\% and 0.03\% respectively.
 We observe that the average cluster accuracy is higher than the average cluster accuracy of the 25\% set. 
 The average of the differences between full set score and clustered score is 0.49\% which is smaller than the average difference than that of the 25\% set.
@@ -176,7 +176,7 @@ commons-csv                   & 85.16\%                                         
 \end{table}
 \FloatBarrier
 
-Table \ref{tab:clustering_no_distance_75} displays the results of clustering mutants with all characteristics and the number of clusters equal to the total amount of mutants * 0.50.
+Table \ref{tab:clustering_no_distance_75} displays the results of clustering mutants without Levensthein distance and the number of clusters equal to the total amount of mutants * 0.50.
 The maximum and minimum differences between the score of a full set and clustered set are 3.63\% and 0.04\% respectively.
 We observe that the average accuracy is higher than the average accuracy of the other sets.
 The average of the differences between full set score and clustered score is  0.49\% which is higher than the average difference than that of the 25\% and the same of that of the 50\% set.
