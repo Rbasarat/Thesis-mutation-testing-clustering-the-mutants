@@ -61,21 +61,21 @@ The learning vector quantization model is a supervised learning model.
 We established that we need an unsupervised learning model to cluster the mutants.
 Therefore we will not select the learning vector quantization model.
 
-\subsubsection{Self organizing map, C-means and fuzzy C-means}
+\subsubsection{Self organizing map, C-means and \acrlong{fcm}}
 \label{ch:topThreeModels}
-The \acrfull{som}, C-means and fuzzy C-means models are all models that would fit our purpose. 
+The \acrfull{som}, C-means and \acrfull{fcm} models are all models that would fit our purpose. 
 To choose between these models we will look at the performance of each model.
 Mingoti et al., compared the performance of these three models \cite{Mingoti2006ComparingAlgorithms}.
 They did a Monte Carlo simulation where the cluster sizes and amount of random numbers in the data set varied each simulation\cite{Mingoti2006ComparingAlgorithms}.
 Other variables such as cluster boundaries and overlap were also controlled in the experiment.
-They observe that the C-means and fuzzy C-means had good performance for non overlapping situations\cite{Mingoti2006ComparingAlgorithms}.
-The best results for average recovery and internal dispersion rates were found for Fuzzy C-means which was very stable in all situations achieving recovery averages over 90\%\cite{Mingoti2006ComparingAlgorithms}
+They observe that the C-means and \acrlong{fcm} had good performance for non overlapping situations\cite{Mingoti2006ComparingAlgorithms}.
+The best results for average recovery and internal dispersion rates were found for \acrlong{fcm} which was very stable in all situations achieving recovery averages over 90\%\cite{Mingoti2006ComparingAlgorithms}
 The C-means method was very affected by the presence of a large amount of outliers.
 They conclude that the \acrshort{som} did not perform well in many cases being very affected by the amount of variables and clusters even for the non overlapping cases\cite{Mingoti2006ComparingAlgorithms}.
 They also conclude that their results partially overlap with other research in the same domain.
 \newline
-Based on these results we can conclude that the fuzzy c-means model has the best performance overall.
-For this experiment we select the fuzzy c-means model.
+Based on these results we can conclude that the \acrshort{fcm} model has the best performance overall.
+For this experiment we select the \acrshort{fcm} model.
 
 \subsection{Training strategy}
 \label{ch:training_strategy}
@@ -95,30 +95,30 @@ To make our results reproducible we will select a random division based on a gen
 The seed generated for each run will be included in the results and can be found in the Github repository\cite{rbasarat-repo}.
 
 \subsection{Implementation of algorithm}
-The research paper of the fuzzy c-means algorithm is referenced in the survey paper of Du et al\cite{Du2010Clustering:Approach}.
-The fuzzy c-means algorithm is developed by Bezdek et al.\cite{Bezdek1984FCM:Algorithm}.
+The research paper of the \acrshort{fcm} algorithm is referenced in the survey paper of Du et al\cite{Du2010Clustering:Approach}.
+The \acrshort{fcm} algorithm is developed by Bezdek et al.\cite{Bezdek1984FCM:Algorithm}.
 Based on their research an implementation can be developed.
-There are existing libraries that contain the implementation of the fuzzy c-means algorithm.
-Developing our own version of the fuzzy c-means algorithm is out of scope for this research.
-For this reason we choose to use a library that implements the fuzzy c-means algorithm.
-The library we will use for this experiment is the fuzzy c-means implementation build by Dias et al.\cite{dias2019fuzzy}.
+There are existing libraries that contain the implementation of the \acrshort{fcm} algorithm.
+Developing our own version of the \acrshort{fcm} algorithm is out of scope for this research.
+For this reason we choose to use a library that implements the \acrshort{fcm} algorithm.
+The library we will use for this experiment is the \acrlong{fcm} implementation build by Dias et al.\cite{dias2019fuzzy}.
 The theory developed by Bezdek et al., is implemented in this library.
 The library has been used in other research\cite{DeAlmeidaNeto2020, Kopf2019, Nwadiugwu2020} and is actively maintained.
 
 \subsection{Algorithm parameters}
-The fuzzy c-means algorithm has to initialize the centroids of the clusters.
+The \acrshort{fcm} algorithm has to initialize the centroids of the clusters.
 Our selected library does this based on a random number.
 It also allows us to control this random number.
 To make the initialization of the centroid reproducible and deterministic we will use a generated seed.
 The seed generated is included in the Github repository\cite{rbasarat-repo}.
 \newline
-Bezdek et al., also researched cluster validity for the fuzzy c-means model\cite{Bezdek1995OnModel}.
+Bezdek et al., also researched cluster validity for the \acrshort{fcm} model\cite{Bezdek1995OnModel}.
 They researched what effect which parameters have on the validity of the clusters.
 They specifically analyzed the role of weighting exponent \textit{m}(fuzziness parameter).
 They concluded that the best choice for \textit{m} is probably in the interval [1.5, 2.5], whose mean and midpoint is \textit{m}=2.
 Wu proposed a new guideline for selecting parameter \textit{m}\cite{Wu2012}.
-His point of view was that a large \textit{m} value will make the fuzzy c-means more robust to noise and outliers.
-He suggests implementing fuzzy c-means with \textit{m}=[1.5, 4].
+His point of view was that a large \textit{m} value will make the \acrlong{fcm} more robust to noise and outliers.
+He suggests implementing \acrlong{fcm} with \textit{m}=[1.5, 4].
 When the data set contains noise and outliers, the fuzzifier\textit{m}=4 is recommended in a theoretical upper bound case.
 Since our data set does not contain noise and outliers we choose to select the midpoint concluded in the research of Bezdek et al.\cite{Bezdek1995OnModel}.
 The value of \textit{m} in this experiment is 2.
@@ -130,7 +130,7 @@ These models are designed to estimate the number of clusters in a data set.
 The subtractive clustering model is specifically designed to approximate the number of clusters for fuzzy system models\cite{Chiu1994FuzzyEstimation}.
 It approximates the centroids and amount of the clusters based on the data points in the data set\cite{Chiu1994FuzzyEstimation}.
 We will select and implement the subtractive clustering model to estimate the number of clusters.
-We can use this number for the number of clusters parameter in the fuzzy c-means algorithm.
+We can use this number for the number of clusters parameter in the \acrshort{fcm} algorithm.
 
 \subsection{Implementation of subtractive clustering}
 The research paper of the mountain and subtractive algorithms are referenced in the survey paper of Du et al\cite{Du2010Clustering:Approach}.
