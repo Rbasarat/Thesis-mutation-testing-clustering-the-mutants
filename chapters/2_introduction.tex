@@ -32,7 +32,7 @@ To prevent changing the overall functionality of the program, mutants are repres
 After all the mutants are executed the mutation score can be calculated. 
 The mutation score is the percentage of mutants killed divided by the total amount of mutants executed.
 If a large amount of mutants survives, it might be an indication that the quality of the test suite is poor as programming errors remain undetected.
-Mutation testing has considerable drawbacks\todo{add ref}, such as the equivalent mutant problem and being resource expensive.
+Mutation testing has considerable drawbacks\cite{Pizzoleto2019}, such as the equivalent mutant problem and being resource expensive.
 
 \section{Problem statement}
 Mutation testing requires a significant amount of computational resources\cite{Kintis2016EffectiveMutation}. 
@@ -76,7 +76,8 @@ We chose to focus on projects that use Java as main programming language because
 \section{Contributions}
 Our research makes the following contributions:
 \begin{enumerate}
- \item A methodology to cluster generated mutants based on chosen characteristics to reduce the cost of mutation testing.\todo{both white box and black box?}
+ \item A white box methodology to cluster generated mutants based on chosen characteristics to reduce the cost of mutation testing.
+  \item A black box methodology to cluster generated mutants based on chosen characteristics to reduce the cost of mutation testing.
  \item A \acrfull{poc} which implements the qualitative methodology chosen and elaborated within the thesis.
  \item A \acrfull{poc} which implements the quantitative approach to cluster mutants and is elaborated within the thesis. 
 \end{enumerate}
