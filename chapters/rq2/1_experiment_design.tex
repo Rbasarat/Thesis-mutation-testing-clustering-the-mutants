@@ -96,6 +96,7 @@ To make our results reproducible we will select a random division based on a gen
 The seeds generated for each run will be included in the results and can be found in the Github repository\cite{rbasarat-repo}.
 
 \subsection{Implementation of algorithm}
+\label{ch:fcm_implementation}
 The research paper of the \acrshort{fcm} algorithm is referenced in the survey of Du et al\cite{Du2010Clustering:Approach}.
 The \acrshort{fcm} algorithm is developed by Bezdek et al.\cite{Bezdek1984FCM:Algorithm}.
 Based on their research an implementation can be developed.
@@ -115,26 +116,27 @@ To make the initialization of the centroid reproducible we will use the same gen
 The seeds generated are included in the Github repository\cite{rbasarat-repo}.
 \newline
 Bezdek et al., also researched cluster validity for the \acrshort{fcm} model\cite{Bezdek1995OnModel}.
-They researched what effect which parameters have on the validity of the clusters.
+They researched what effect which parameters could have on the validity of the clusters.
 They specifically analyzed the role of weighting exponent \textit{m}(fuzziness parameter).
-They concluded that the best choice for \textit{m} is probably in the interval [1.5, 2.5], whose mean and midpoint is \textit{m}=2.
+They concluded that the best choice for \textit{m} is in the interval [1.5, 2.5], whose mean and midpoint is \textit{m}=2.
 Wu proposed a new guideline for selecting parameter \textit{m}\cite{Wu2012}.
 His point of view was that a large \textit{m} value will make the \acrlong{fcm} more robust to noise and outliers.
 He suggests implementing \acrlong{fcm} with \textit{m}=[1.5, 4].
 When the data set contains noise and outliers, the fuzzifier \textit{m}=4 is recommended in a theoretical upper bound case.
-Since our data set does not contain noise and outliers we choose to select the midpoint concluded in the research of Bezdek et al.\cite{Bezdek1995OnModel}.
+Since our data set does not contain noise we choose to select the midpoint concluded in the research of Bezdek et al.\cite{Bezdek1995OnModel}.
 The value of \textit{m} in this experiment is 2.
 \newline
 Finding the correct amount of clusters has been an ongoing problem for clustering algorithms\cite{Du2010Clustering:Approach}.
-Fortunately there are some techniques available to estimate the number of clusters.
+Fortunately there are techniques available to estimate the number of clusters.
 During model selection we discussed the mountain and subtractive models. 
 These models are designed to estimate the number of clusters in a data set.
 The subtractive clustering model is specifically designed to approximate the number of clusters for fuzzy system models\cite{Chiu1994FuzzyEstimation}.
 It approximates the centroids and amount of the clusters based on the data points in the data set\cite{Chiu1994FuzzyEstimation}.
 We will select and implement the subtractive clustering model to estimate the number of clusters.
-We can use this number for the number of clusters parameter in the \acrshort{fcm} algorithm.
+We will use this number as the value for the number of clusters parameter in the \acrshort{fcm} algorithm.
 
 \subsection{Implementation of subtractive clustering}
+For the same reasons as in Chapter \ref{ch:fcm_implementation} we will select a library that implements the subtractive clsutering algorithm.
 The research paper of the mountain and subtractive algorithms are referenced in the survey paper of Du et al\cite{Du2010Clustering:Approach}.
 Based on the paper of the theory of the subtractive algorithm\cite{Chiu1994FuzzyEstimation} we found an existing implementation\cite{matlabSubtractive}.
 The implementation is professionally build and maintained by Matlab\cite{matlabSubtractive}.
@@ -142,9 +144,9 @@ Matlab is a tool commonly used in the academic world and is professionally maint
 
 \subsection{Validation}
 To validate our machine learning model we will calculate the weighted mutation score and cluster accuracy based on the clusters calculated by the model.
-This is the same validation method as described in Chapter \ref{ch:exp1_validation}.
+We use the same validation method as described in Chapter \ref{ch:exp1_validation}.
 We will use the mutants of projects that are not selected for training as input for validating the model.
-As described in Chapter \ref{ch:training_strategy} the projects should represent approximately 20\% of the total amount of mutants in our data set.
+As described in Chapter \ref{ch:training_strategy} the mutants should represent approximately 20\% of the total amount of mutants per project.
 It may be possible the model has to cluster mutants it has never seen before.
 We will use the same statistical significance threshold as in our firsts experiment to decide whether we will accept or reject or hypothesis.
 To make our results reproducible we will select a random mutant based on a generated seed.

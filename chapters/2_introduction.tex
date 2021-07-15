@@ -22,6 +22,7 @@ Test suite effectiveness is measured by the number of faulty versions of a \acrf
 Real faults are unknown in advance, we can use mutation testing as a proxy measurement. 
 Research has found statistically significant evidence which correlates mutant detection with real fault detection\cite{Just2014AreTesting}.
 \newline
+\todo[inline]{is this your approach? the current general approach?}
 Mutation testing tools create small faulty versions of the program.
 The test suite is then run to verify if these faults are detected.
 These faults are called mutants and are created by mutators.
@@ -31,7 +32,7 @@ To prevent changing the overall functionality of the program, mutants are repres
 After all the mutants are executed the mutation score can be calculated. 
 The mutation score is the percentage of mutants killed divided by the total amount of mutants executed.
 If a large amount of mutants survives, it might be an indication that the quality of the test suite is poor as programming errors remain undetected.
-Mutation testing has considerable drawbacks, such as the equivalent mutant problem and being resource expensive.
+Mutation testing has considerable drawbacks\todo{add ref}, such as the equivalent mutant problem and being resource expensive.
 
 \section{Problem statement}
 Mutation testing requires a significant amount of computational resources\cite{Kintis2016EffectiveMutation}. 
@@ -46,10 +47,9 @@ However in their paper they indicate that the choosing expressions as the domain
 A recurring problem in the research of mutation clustering is to determine the means of domains as the centre of a cluster\cite{Ji2009,Wilinski2015,Ma2016,Wei2021SpectralTesting}.
 \newline
 To reduce the cost of mutation testing, we try to find a solution that can cluster mutants while maintaining the accuracy of the same complete set of mutants. 
-Our goal is to cluster any mutant that is generated.
-We will do this with two different approaches.
-Our first approach will be a qualitative approach and second a quantitative approach. 
-We structure our research on the following research questions:
+Our goal is to cluster any mutant that is generated \todo{make the goal clearer: no requirements on which mutants get clustered: aim at generic mutant clustering}.
+We will do this with two different approaches: qualitative and quantitative. 
+We structure our research as follows:
 \newline
 \textbf{Research Question 1}: What set of characteristics can we identify for clustering generated mutants to reduce the amount executed, while maintaining effectiveness?
 \newline
@@ -76,7 +76,7 @@ We chose to focus on projects that use Java as main programming language because
 \section{Contributions}
 Our research makes the following contributions:
 \begin{enumerate}
- \item A methodology to cluster generated mutants based on chosen characteristics to reduce the cost of mutation testing.
+ \item A methodology to cluster generated mutants based on chosen characteristics to reduce the cost of mutation testing.\todo{both white box and black box?}
  \item A \acrfull{poc} which implements the qualitative methodology chosen and elaborated within the thesis.
  \item A \acrfull{poc} which implements the quantitative approach to cluster mutants and is elaborated within the thesis. 
 \end{enumerate}
