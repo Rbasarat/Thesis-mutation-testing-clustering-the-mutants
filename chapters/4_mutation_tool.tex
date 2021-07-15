@@ -3,8 +3,8 @@
 
 \chapter{Mutation testing tools}
 \label{ch:mutation-tool}
-
-Before we can start clustering mutants we need to select a tool that helps us generate mutants. 
+To cluster mutants we need to select a tool that generate mutants and executes mutants.
+Such tools are called mutation testing tools.
 Our goal is to find the tool that generates the most amount of mutants. 
 \newline
 First, we review existing literature. 
@@ -32,6 +32,7 @@ Marki and Lindstrom performed their research on the same three mutation testing 
 The same cross-testing technique used by Kintis et al., was applied for three small Java programs. 
 These programs are popular programs used in testing literature.
 They found that the mutation tools do not subsume each other. 
+"one mutant subsumes a second mutant if every test that kills the first mutant is guaranteed also to kill the second \cite{Ammann2014EstablishingMutants}"
 According to the research a ranking of the tools would be as follows; MuJava generated the strongest mutants followed by Major and PIT.
 Furthermore they found that MuJava generated significantly more equivalent mutants\cite{Marki2017MutationJava}.
 MuJava also had an execution time twice the amount of that of Major and PIT combined.
