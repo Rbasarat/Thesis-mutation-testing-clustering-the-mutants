@@ -1,6 +1,5 @@
 \documentclass[../../main]{subfiles}
 \begin{document}
-% Because we use sections but these sections should be interpreted as chapters for rq1 and rq2 sectioning.
 \clearpage
 \section{Results}
 \label{ch:results_rq1}
@@ -11,21 +10,22 @@ The second section displays the results of clustering without the Levensthein di
 \newline
 During the process of extracting the characteristics we found that calculating the Levenshtein distance took a long time.
 Calculating the Levenshtein distance for the four biggest projects in the data set cost days.
-Even for the smaller projects it increased extraction of the characteristics by hours.
-Including the Levenshtein distance defeats the purpose of increasing the performance as every bit of performance we increase will be replaced by the cost of calculating the Levenshtein distance.
-For this reason we decided to repeat the experiment without the Levensthein distance characteristic.
+Even for the smaller projects the extraction of the characteristics cost hours.
+Including the Levenshtein distance defeats the purpose of increasing performance as every bit of performance we increase would be replaced by the cost of calculating the Levenshtein distance.
+To see if we could mitigate this risk we decided to repeat the experiment without the Levensthein distance characteristic.
 \newline
 Due to the limitation of resources and time we had to omit four source projects from these results. 
 The hardware was not equipped to store the amount of generated mutants for these projects, we did not have enough memory.
 Trying to cluster these mutants this resulted in a out of memory error.
-\newline
+
+\subsection{Clustering with all characteristics}
+This section displays the results of our clustering algorithm when executed with data that consists of all characteristics.
+First we show the results to test our null hypothesis discussed in Chapter \ref{ch:mutant_selection}.
+The results are be grouped based on the percentage in reduction of mutants executed.
+We also display the accuracy of the clusters per reduction.
 The results displayed are the average of the results of the 30 repetitions of the experiment.
 The result of each single repetition can be found in our Github repository\cite{rbasarat-repo}.
 
-\subsection{Clustering with all characteristics}
-This section will display the results of our clustering algorithm when executed with data that consists of all characteristics. We randomly selected the similarity characteristic. 
-The results will be grouped based on the reduced percentage of mutants executed.
-We will also display the accuracy of the clusters per reduction amount.
 \begin{table}[!htb]
 \begin{tabular}{|l|c|c|c|c|c|}
 \hline
@@ -107,6 +107,8 @@ The average of the differences between full set score and clustered score is 0.4
 This section will display the results of our clustering algorithm when executed without the Levenshtein distance.
 The results will be grouped based on the reduced percentage of mutants executed.
 We will also display the accuracy of the clusters per reduction amount.
+The results displayed are the average of the results of the 30 repetitions of the experiment.
+The result of each single repetition can be found in our Github repository\cite{rbasarat-repo}.
 \begin{table}[htb]
 \begin{tabular}{|l|c|c|c|c|c|}
 \hline

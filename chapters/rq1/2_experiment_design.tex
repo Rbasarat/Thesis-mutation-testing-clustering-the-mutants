@@ -3,7 +3,7 @@
 % Because we use sections but these sections should be interpreted as chapters for rq1 and rq2 sectioning.
 \clearpage
 \section{Experiment design}
-In this chapter we design an experiment to answer the first research question.
+In this chapter we design an experiment to validate our research.
 We hypothesise that we can cluster mutants with the set of characteristics we identified
 while maintaining effectiveness and reducing the amount executed when executing one mutant from each cluster that is randomly selected.
 Our goal is to achieve a weighted mutation score that is as close as possible to the mutation score of a full set of executed mutants.
@@ -53,20 +53,7 @@ We do not add the information about the survival of a mutant.
 We only need this data to validate our results. 
 
 
-\subsection{Levenshtein distance on Java byte code}
-A mutant is a piece of code that differs in a predefined way from its parent.
-Java source code compiles into Java byte code.
-During the compilation of Java code certain context is abstracted away\cite{byteCodeEngineering}.
-Optimisations are applied which also changes the Java byte code\cite{byteCodeEngineering}.
-As a result the textual similarity between a Java code mutant and its parent is different from the similarity between a Java byte code mutant and its parent.
-While the textual similarity may be different between the Java code and Java byte code the functionality remains the same.
-Java byte code reflects more of the semantic nature of the source code than the source code itself does. 
-PIT generates and executes mutants on byte code level\cite{pitestBytecode}. 
-In other words PIT executes the unit tests of a source against the byte code of a mutant.
-\newline
-By calculating the distance on byte code we filter out the context that is present in Java code.
-This gives us a Levenshtein distance that represents more of the semantic difference, between a mutant and parent, than calculating the distance for Java code.
-For this characteristic we will use the Levenshtein distance between a Java byte code mutant and its parent.
+
 
 \subsection{Levenshtein distance implementation}
 There are different implementations of the Levensthein distance.
@@ -173,8 +160,13 @@ We consider the mutants that are not in the majority of the cluster as inaccurac
 \newline
 If the weighted mutation score of our clustered set deviates more than 5\% from the score of a full set we will reject our hypothesis.
 
-\subsection{Mutant selection}
+\subsection{Mutant selection and random sampling}
+\label{ch:mutant_selection}
 As stated in our hypothesis we will randomly select a mutant from each cluster to be executed.
+To validate our sample we make use of statistical hypothesis testing\cite{Emmert-Streib2019UnderstandingInference}. 
+Our null hypothesis states that there is no relation between the characteristics identified and the results of a mutant.
+To test this hypothesis we select an alpha value of 0.05.
+To translate; if more than five percent of the values in a sample deviates more than the significance level(see Chapter \ref{ch:exp1_validation}) we cannot reject the null hypothesis.
 To make our results reproducible we will select the random mutant based on a generated seed.
 The seed generated for each run will be included in the results and can be found in the Github repository\cite{rbasarat-repo}.
 We will repeat our experiment 30 times with 30 different seeds.
