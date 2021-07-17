@@ -1,6 +1,29 @@
 \begin{appendices}
 	
-	\chapter{Non-crucial information}
-
+\chapter{PIT maven code}
+\label{ap:PIT_maven_code}
+Example of code used to execute a full set of mutants with PIT.
+\begin{lstlisting}
+    <plugins>
+      <plugin>
+        <groupId>org.pitest</groupId>
+        <artifactId>pitest-maven</artifactId>
+        <version>1.6.4</version>
+        <dependencies>
+          <dependency>
+            <groupId>com.niverhawk</groupId>
+            <artifactId>pitest-clustering-plugin</artifactId>
+            <version>1.0-SNAPSHOT</version>
+          </dependency>
+        </dependencies>
+        <configuration>
+          <exportLineCoverage>true</exportLineCoverage>
+          <mutators>
+            <mutator>ALL</mutator>
+          </mutators>
+          <threads>6</threads>
+        </configuration>
+      </plugin>
+\end{lstlisting}
 	
 \end{appendices}
