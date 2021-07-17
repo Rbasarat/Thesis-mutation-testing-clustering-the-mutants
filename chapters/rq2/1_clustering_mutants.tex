@@ -56,7 +56,7 @@ The learning vector quantization model is a supervised learning model.
 We established that we need an unsupervised learning model to cluster the mutants.
 Therefore we will not select the learning vector quantization model.
 
-\subsection{Self organizing map, C-means and \acrlong{fcm}}
+\subsection{Self organizing map, C-means and fuzzy c-means}
 \label{ch:topThreeModels}
 The \acrfull{som}, C-means and \acrfull{fcm} models are all models that would fit our purpose. 
 To choose between these models we will look at the performance of each model.
@@ -117,7 +117,7 @@ Wu proposed a new guideline for selecting parameter \textit{m}\cite{Wu2012}.
 His point of view was that a large \textit{m} value will make the \acrlong{fcm} more robust to noise and outliers.
 He suggests implementing \acrlong{fcm} with \textit{m}=[1.5, 4].
 When the data set contains noise and outliers, the fuzzifier \textit{m}=4 is recommended in a theoretical upper bound case.
-Since our data set does not contain noise we choose to select the midpoint concluded in the research of Bezdek et al.\cite{Bezdek1995OnModel}.
+Since our data set does not contain noise(all mutants consists of every characteristic) we choose to select the midpoint concluded in the research of Bezdek et al.\cite{Bezdek1995OnModel}.
 The value of \textit{m} in this experiment is 2.
 \newline
 Finding the correct amount of clusters has been an ongoing problem for clustering algorithms\cite{Du2010Clustering:Approach}.

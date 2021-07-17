@@ -9,7 +9,7 @@ The research that exists tries to cluster mutants by defining the centroid of a 
 In our research extends mutation clustering by defining a centroid that is dynamic.
 In other words the centroids of our clusters are defined by the mutants itself.
 
-\subsection{Clustering overlapped mutants}
+\section{Clustering overlapped mutants}
 \label{ch:overlapping_mutants}
 Ma et al., clustered mutants by overlap\cite{Ma2016}.
 They defined the term overlap as as mutants that are functionally equivalent.
@@ -27,14 +27,14 @@ A threat to their validity, which is not addressed, is the fact that two overlap
 Our research solves this problem by taking into account the location of the mutants.
 Chapter \ref{ch:characteristics_location} describes what characteristics we use.
 
-\subsection{Clustering by scope}
+\section{Clustering by scope}
 Yu et al., extended the research about overlapping mutants(See chapter \ref{ch:overlapping_mutants})\cite{Yu2019PossibilityScope}.
 They extended the scope by adding more mutators.
 The also extended the research to include statements and blocks.
 Their results shows an increase in clustered mutants.
 The research of Yu et al., suffers from the same limitations and threats  mentioned in Chapter \ref{ch:overlapping_mutants}.
 
-\subsection{Clustering Hamming distance}
+\section{Clustering Hamming distance}
 Ji et al., did a qualitative domain analysis on mutants\cite{Ji2009}.
 As a result they identified the Hamming distance to cluster with. 
 The Hamming distance is, like the Levenshtein distance, a similarity measure.
@@ -45,7 +45,7 @@ Ji et al., were successful in clustering mutants with Hamming distance and the k
 They do acknowledge that their research still has problems with rationally determining the domains of their clusters.
 Our research does not have this problem, as the centre of the domains are decided by the characteristics of the mutants.
 
-\subsection{Spectral clustering}
+\section{Spectral clustering}
 Wei et al., makes use of an intelligent technique, namely spectral clustering, to improve the efficacy of mutant reduction\cite{Wei2021SpectralTesting}.
 They defined multiple definitions for the mutants; similarity distance, distance between the mutants and a killing matrix of the mutants.
 With these definitions they reduced the mutants based on their proposed reduction method.
@@ -56,7 +56,7 @@ They write that there is still work left to do in optimizing the matrices and cl
 Our goal overlaps with that of Wei, the difference is that we used a different methodology to achieve that goal.
 Another difference is that our research does not require to know the result of a mutant(killed or survived).
 
-\subsection{Clustering similarity}
+\section{Clustering similarity}
 Hussain et al., used the k-means and agglomerative clustering algorithm to cluster the mutants according to a similarity measure. 
 They used the Hamming distance as similarity measure.
 They calculated the distance and used this as data to feed into the clustering algorithms.
@@ -67,7 +67,7 @@ The difference is that our research used different and more elaborated methods t
 Hussain et al., calculated the mutation score by counting one cluster as one mutant.
 Our research calculated a weighted mutation score to reflect the clusters more accurately.
 
-\subsection{Generalizing mutants}
+\section{Generalizing mutants}
 Wilinski et al., tried to generalize the mutants by defining metrics.
 Each metric is calculated for a specific mutator.
 The three metrics are usefulness, frequency and dependency.
