@@ -1,16 +1,13 @@
 \documentclass[../../main]{subfiles}
 \begin{document}
-\section{Clustering mutants}
-In this chapter devise a methodology for our black box approach.
-Our goal is to achieve a mutation score that is as close as possible to the mutation score of a full set of executed mutants.
-We select a machine learning model and decide on a training strategy.
 
-\subsection{Selecting a machine learning model}
+\section{Selecting a machine learning model}
+In this section we will select a machine learning model.
 We will first choose between supervised or unsupervised learning.
 Our starting point for selecting a machine learning model are the models discussed in the survey done by K.L. Du.
 Based on the choice of supervised or unsupervised learning we will review the corresponding models and decide if they fit our use case by a process of elimination.
 
-\subsubsection{Supervised or unsupervised learning}
+\subsection{Supervised or unsupervised learning}
 In this subsection we will decide on supervised or unsupervised learning.
 The application and description of these two types of learning are described in Chapter \ref{ch:background}.
 \newline
@@ -25,7 +22,7 @@ Unsupervised learning models do not need a labeled data set and can recognize re
 This corresponds to what we want to achieve with this experiment.
 Therefore we choose unsupervised learning to continue with in our experiment.
 
-\subsubsection{Mountain and subtractive clustering}
+\subsection{Mountain and subtractive clustering}
 The mountain and subtractive clustering models are an effective method for estimating the number of clusters\cite{Du2010Clustering:Approach}. 
 The subtractive clustering model is an extension of the mountain model\cite{Du2010Clustering:Approach}. 
 \newline
@@ -34,7 +31,7 @@ The method grids the data space and computes a potential value for each grid poi
 Subtractive clustering is designed for learning fuzzy systems models from data\cite{Chiu1994FuzzyEstimation}. 
 If it is required to find out the number of clusters we need for our model we can make use of these models.
 
-\subsubsection{ART models}
+\subsection{ART models}
 ART models are characterized by systems of differential equations that formulate stable self-organizing learning methods\cite{Du2010Clustering:Approach}.
 The stability and plasticity properties as well as the ability to efficiently process dynamic data make the ART attractive for clustering large, rapidly changing sequences of input patterns\cite{Du2010Clustering:Approach}.
 While the ART models are good at what they do, they do not fit our purpose of clustering mutants.
@@ -42,7 +39,7 @@ As described above the ART models expect rapidly changing sequences of input pat
 Our data does not contain binary input patterns and it is also not rapidly changing.
 Therefore we will not select an ART model.
 
-\subsubsection{Neural gas}
+\subsection{Neural gas}
 The neural gas is a topology-preserving network, and can be treated as an extension to the C-means\cite{Du2010Clustering:Approach}.
 A data optimal topological ordering is achieved by using neighborhood ranking within the input space at each training step\cite{Du2010Clustering:Approach}.
 To find its neighborhood rank, each neuron compares its distance to the input vector with those of all the other neurons to the input vector\cite{Du2010Clustering:Approach}. 
@@ -54,12 +51,12 @@ One of the properties of a learning network is that it is not designed to fit ne
 For this reason we cannot use the neural gas network to predict in what cluster a new mutant should be placed.
 Therefore we will not select the neural gas network.
 
-\subsubsection{Learning vector quantization}
+\subsection{Learning vector quantization}
 The learning vector quantization model is a supervised learning model.
 We established that we need an unsupervised learning model to cluster the mutants.
 Therefore we will not select the learning vector quantization model.
 
-\subsubsection{Self organizing map, C-means and \acrlong{fcm}}
+\subsection{Self organizing map, C-means and \acrlong{fcm}}
 \label{ch:topThreeModels}
 The \acrfull{som}, C-means and \acrfull{fcm} models are all models that would fit our purpose. 
 To choose between these models we will look at the performance of each model.
@@ -75,27 +72,26 @@ They also observe  that their results partially overlap with other research in t
 Based the conclusions made by Mingoti et al., we can conclude that the \acrshort{fcm} model has the best performance overall.
 Thus for this experiment we select the \acrshort{fcm} model.
 
-\subsection{Training strategy}
+\section{Training strategy}
 \label{ch:training_strategy}
-Our data set contains of mutants represented by their characteristics. 
+Our data set consists of mutants represented by their characteristics. 
 The characteristics of the mutants are generated per project and have a project specific context.
+For example, a mutant with a mutator in a certain project can have a different effect on the source code and can give other results than a mutator in a different project.
 The relations between the mutants are scoped to their own project. 
 In other words if a specific mutant has a relation to another mutant in the same project, this relation may not exist between the same mutant and a mutant from a different project.
-For example, a mutant with a mutator in a certain project can have a different effect on the source code and can give other results than a mutator in a different project.
-To keep the relations and context we decided to train a separate model per project.
+To preserve these relations and context we decided to train a separate model per project.
 \newline
 To validate the model we need to split our data set into a training set and a validation set.
-Our total data set consists of approximately 1 million mutants generated over fourteen projects.
 Research has shown that if the data set is big enough a ratio of 80/20 is sufficient\cite{Guyon1997ARatio}.
 We will divide each source projects into training and validation groups to reflect the 80/20 ratio as best as possible.
 Depending on the amount of mutants per project we might not achieve a perfect 80/20 ratio.
 The division of the mutants will be done randomly. 
-To make our results reproducible we will select a random division based on a generated seed.
+To make our results reproducible we select a random division based on a generated seed.
 The seeds generated for each run will be included in the results and can be found in the Github repository\cite{rbasarat-repo}.
 
-\subsection{Implementation of algorithm}
+\section{Implementation of algorithm}
 \label{ch:fcm_implementation}
-The research paper of the \acrshort{fcm} algorithm is referenced in the survey of Du et al\cite{Du2010Clustering:Approach}.
+The research paper of the \acrshort{fcm} algorithm is referenced in the survey of Du et al.\cite{Du2010Clustering:Approach}.
 The \acrshort{fcm} algorithm is developed by Bezdek et al.\cite{Bezdek1984FCM:Algorithm}.
 Based on their research an implementation can be developed.
 There are existing libraries that contain the implementation of the \acrshort{fcm} algorithm.
@@ -106,7 +102,7 @@ The library we will use for this experiment is the \acrlong{fcm} implementation 
 The theory developed by Bezdek et al., is implemented in this library.
 The library is actively maintained and has been used before in other research\cite{DeAlmeidaNeto2020, Kopf2019, Nwadiugwu2020}.
 
-\subsection{Algorithm parameters}
+\section{Algorithm parameters}
 The \acrshort{fcm} algorithm has to initialize the centroids of the clusters.
 The library we selected does this based on a random number.
 It also allows us to control this random number.
@@ -133,23 +129,12 @@ It approximates the centroids and amount of the clusters based on the data point
 We will select and implement the subtractive clustering model to estimate the number of clusters.
 We will use this number as the value for the number of clusters parameter in the \acrshort{fcm} algorithm.
 
-\subsection{Implementation of subtractive clustering}
+\section{Implementation of subtractive clustering}
 For the same reasons as in Chapter \ref{ch:fcm_implementation} we will select a library that implements the subtractive clsutering algorithm.
 The research paper of the mountain and subtractive algorithms are referenced in the survey paper of Du et al\cite{Du2010Clustering:Approach}.
 Based on the paper of the theory of the subtractive algorithm\cite{Chiu1994FuzzyEstimation} we found an existing implementation\cite{matlabSubtractive}.
 The implementation is professionally build and maintained by Matlab\cite{matlabSubtractive}.
 Matlab is a tool commonly used in the academic world and is professionally maintained for this reason we decided to use their implementation of subtractive clustering.
 
-\subsection{Validation}
-To validate our machine learning model we will calculate the weighted mutation score and cluster accuracy based on the clusters calculated by the model.
-We use the same validation method as described in Chapter \ref{ch:exp1_validation}.
-We will use the mutants of projects that are not selected for training as input for validating the model.
-As described in Chapter \ref{ch:training_strategy} the mutants should represent approximately 20\% of the total amount of mutants per project.
-It may be possible the model has to cluster mutants it has never seen before.
-We will use the same statistical significance threshold as in our firsts experiment to decide whether we will accept or reject or hypothesis.
-To make our results reproducible we will select a random mutant based on a generated seed.
-We will repeat our experiment 30 times with 30 different seeds.
-Achieving consistent results while applying random selection and cluster initialization will contribute to the validity of the experiment.
-The seed generated for each run will be included in the results and can be found in the Github repository\cite{rbasarat-repo}.
 
 \end{document}

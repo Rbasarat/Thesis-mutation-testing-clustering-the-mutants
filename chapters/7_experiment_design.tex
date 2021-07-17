@@ -5,6 +5,7 @@ In this chapter we design an experiment to validate our research.
 We hypothesise that we can cluster mutants with the set of characteristics we identified
 while maintaining effectiveness and reducing the amount executed when executing one mutant from each cluster that is randomly selected.
 Our goal is to achieve a weighted mutation score that is as close as possible to the mutation score of a full set of executed mutants.
+We will repeat the experiment for each approach we devised in Chapters \ref{ch:reserach_question1} and \ref{ch:reserach_question2}.
 
 \section{Project selection}
 \label{ch:project_selection}
@@ -24,6 +25,22 @@ We can then use the \acrfull{cli} and a maven command(see Listing \ref{lst:mvn-f
 \begin{lstlisting}[label=lst:mvn-full,caption=Command used to execute full set of mutants with PIT.]
 mvn -U org.pitest:pitest-maven:mutationCoverage
 \end{lstlisting}
+
+\subsection{Weighted mutation score}
+\label{ch:weighted_score}
+Our hypothesis states that each mutants executed should represent that whole cluster.
+With a mutant executed from each cluster we can calculate a mutation score.
+This mutation score is a weighted mutation score.
+This weighted mutation score is the product of the result of a mutant(1 for killed and 0 for survived) and the amount of mutants in the cluster it represents.
+The weighted mutation score is then comparable to the score of a full set as the total number of mutants will be the same.
+\newline
+For example, take a full set with a score of 75/100 killed mutants.
+This gives us a mutation score of 75\%. 
+We then cluster the mutants in four clusters consisting of 12, 30, 38 and 20 mutants, respectively.
+We randomly select four mutants of each cluster and execute them.
+The mutants representing cluster one and four survive and two and three are killed.
+If we calculate the weighted score we get 68/100 which is 68\%.
+We can then compare this to the score of a full set because the amount of mutants executed is the same: 75/100(75\%) and 68/100(68\%).
 
 \section{Validation}
 \label{ch:exp1_validation}
@@ -49,8 +66,7 @@ If the weighted mutation score of our clustered set deviates more than 5\% from 
 \section{Random mutant selection}
 \label{ch:mutant_selection}
 As stated in our hypothesis we randomly select a mutant from each cluster to be executed.
-To validate our sample we make use of statistical hypothesis testing\cite{Emmert-Streib2019UnderstandingInference}. 
-Our null hypothesis states that there is no relation between the characteristics identified and the results of a mutant.
+To validate our sample we make use of statistical hypothesis testing\cite{Emmert-Streib2019UnderstandingInference}. Our null hypothesis states that there is no relation between the characteristics identified and the results of a mutant.
 To test this hypothesis we select an alpha value of 0.05.
 To translate; if more than five percent of the values in a sample deviates more than the significance level(see Chapter \ref{ch:exp1_validation}) we cannot reject the null hypothesis.
 To make our results reproducible we will select the random mutant based on a generated seed.
