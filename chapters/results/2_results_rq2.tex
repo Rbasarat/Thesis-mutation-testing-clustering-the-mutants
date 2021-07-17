@@ -1,6 +1,6 @@
 \documentclass[../../main]{subfiles}
 \begin{document}
-\section{Results}
+\section{\acrshort{fcm} model}
 \label{ch:results_rq2}
 In this chapter we present the results of our second experiment.
 We divide the results in two sections. 
@@ -11,7 +11,7 @@ The second section displays the results of clustering without the Levenshtein di
 The results displayed are the average of the results of the 30 repetitions of the experiment.
 The result of each single repetition can be found in our Github repository\cite{rbasarat-repo}.
 
-\subsection{All characteristics}
+\subsection{Clustering with all characteristics}
 This section will display the results of our clustering algorithm when executed with data that consists of all characteristics. 
 Instead of displaying the reduction amount, which we did with the results of experiment one, we display the number of clusters that is calculated by the subtractive clustering model.
 \begin{table}[!htb]
@@ -41,8 +41,9 @@ Zxing                 & 28                   & 70.64\%                          
 Table \ref{tab:ml_full} displays the results of clustering mutants with a all characteristics.
 The maximum and minimum differences between the score of a full set and clustered set are 22.93\% and 0.4\% respectively.
 The average of the differences between full set score and clustered score is 5.43\%.
-\newpage
-\subsection{Clustering without Levensthein distance characteristic}
+
+
+\subsection{Clustering without Levenshtein distance}
 This section will display the results of our clustering algorithm when executed with data that does not contain the Levenshtein distance characteristic. 
 Instead of displaying the reduction amount, as we did in the results of experiment one, we display the number of clusters that is calculated by the subtractive clustering model.
 
