@@ -17,6 +17,22 @@ a form of white box testing in which testers change specific components of an ap
 \textbf{test engine} a test engine facilitates discovery and execution of tests. Examples for Java are TestNG and JUnit.
 \textbf{weighted mutation score} mutation score calculation designed to be comparable with the mutation score of a full set(see Chapter \ref{ch:weighted_score} for a detailed explanation).
 
+\section{Statistics}
+The terminology of statistics may lead to confusion if not understood correctly.
+Thus we discuss some basic terminology and principles in statistics.
+When performing a statistical test we have two hypotheses; a null hypothesis and an alternative hypothesis.
+A test contains a specific null and alternative hypothesis.
+The goal of such a test is to reject the null hypothesis.
+Rejecting a null hypothesis can be done by looking at the resulting \textit{p-value}.
+The \textit{p-value} is the chance that the value of the statistical test occurs if the null hypothesis is true on a
+zero to one scale.
+We can reject a null hypothesis if we think that this chance is below a certain threshold.
+This threshold is determined beforehand and named the \textit{alpha-value}.
+A commonly used value for alpha is 5\%.
+We cannot reject the null hypothesis if the \textit{p-value} is below the \textit{alpha-value}.
+This does not necessarily mean that the null hypothesis is true.
+This can have different reasons, for example, the data set used to validate the hypothesis is too small.
+
 \section{Clustering algorithms}
 This research focuses on clustering mutants and use of existing clustering algorithms. 
 Many different types of clustering algorithms have been proposed\cite{Rodriguez2019}. While there is a lot of diversity, some methods are more frequently used than others\cite{Wu2008TopMining}. 
