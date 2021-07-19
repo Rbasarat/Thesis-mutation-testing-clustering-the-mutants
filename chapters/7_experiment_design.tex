@@ -66,7 +66,7 @@ If the weighted mutation score of our clustered set deviates more than 5\% from 
 \section{Random mutant selection}
 \label{ch:mutant_selection}
 As stated in our hypothesis we randomly select a mutant from each cluster to be executed.
-To validate our sample we make use of statistical hypothesis testing\cite{Emmert-Streib2019UnderstandingInference}. Our null hypothesis states that there is no relation between the characteristics identified and the results of a mutant.
+To validate our sample we make use of statistical hypothesis testing\cite{Emmert-Streib2019UnderstandingInference}. Our null hypothesis states that there is no relation between the characteristics identified and the results of a mutant with the chosen methodology.
 To test this hypothesis we select an alpha value of 0.05.
 To translate; if more than five percent of the values in a sample deviates more than the significance level(see Chapter \ref{ch:exp1_validation}) we cannot reject the null hypothesis.
 To make our results reproducible we will select the random mutant based on a generated seed.
