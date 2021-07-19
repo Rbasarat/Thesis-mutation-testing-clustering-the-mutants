@@ -4,6 +4,7 @@
 \label{ch:results_rq2}
 In this chapter we present the results of our second experiment.
 We divide the results in two sections. 
+For each variant and project we display the weighted mutation score to create box-plots.
 The first section displays the results of clustering with all characteristics.
 For the same reason as in Chapter \ref{ch:results_rq1} we will repeat the experiment without the Levenshtein distance.
 The second section displays the results of clustering without the Levenshtein distance.
@@ -14,6 +15,12 @@ The result of each single repetition can be found in our Github repository\cite{
 \subsection{Clustering with all characteristics}
 This section will display the results of our clustering algorithm when executed with data that consists of all characteristics. 
 Instead of displaying the reduction amount, which we did with the results of experiment one, we display the number of clusters that is calculated by the subtractive clustering model.
+
+\begin{figure}[H]
+\includegraphics[width=\textwidth]{images/fcm_summary/fcm_full.png}
+\caption{\label{box:clustering_fcm_all_25}Box-plots containing weighted mutation score of clustering mutants with all characteristics.}
+\end{figure}
+
 \begin{table}[!htb]
 \hskip-1.5cm
 \begin{tabular}{|l|l|l|l|l|l|l|}
@@ -38,6 +45,8 @@ Zxing                 & 28                   & 70.64\%                          
 \caption{\label{tab:ml_full}Results of clustering mutants with the \acrshort{fcm} model with all characteristics}
 \end{table}
 \FloatBarrier
+Figure \ref{box:clustering_fcm_all_25} displays the box-plots of the weighted mutation score obtained from each individual sample. 
+We can observe that for every box-plot the \textit{p-value} is more than 0.05 or 5\%.
 Table \ref{tab:ml_full} displays the results of clustering mutants with a all characteristics.
 The maximum and minimum differences between the score of a full set and clustered set are 22.93\% and 0.4\% respectively.
 The average of the differences between full set score and clustered score is 5.43\%.
@@ -46,6 +55,11 @@ The average of the differences between full set score and clustered score is 5.4
 \subsection{Clustering without Levenshtein distance}
 This section will display the results of our clustering algorithm when executed with data that does not contain the Levenshtein distance characteristic. 
 Instead of displaying the reduction amount, as we did in the results of experiment one, we display the number of clusters that is calculated by the subtractive clustering model.
+
+\begin{figure}[H]
+\includegraphics[width=\textwidth]{images/fcm_summary/fcm_no_distance.png}
+\caption{\label{box:clustering_fcm_no_distance_25}Box-plots containing weighted mutation score of clustering mutants without Levenshtein distance characteristic.}
+\end{figure}
 
 \begin{table}[!htb]
 \hskip-1.5cm
@@ -71,6 +85,9 @@ Zxing                 & 28                   & 70.64\%                          
 \caption{\label{tab:ml_no_distance}Results of clustering mutants with the \acrshort{fcm} model without Levenshtein distance}
 \end{table}
 \FloatBarrier
+
+Figure \ref{box:clustering_fcm_no_distance_25} displays the box-plots of the weighted mutation score obtained from each individual sample. 
+We can observe that for every box-plot the \textit{p-value} is more than 0.05 or 5\%.
 Table \ref{tab:ml_no_distance} displays the results of clustering mutants without Levenshtein distance.
 The maximum and minimum differences between the score of a full set and clustered set are 21.95\% and 0.61\% respectively.
 The average of the differences between full set score and clustered score is 4.44\% which is bigger than the average difference than that of the results with all characteristics.

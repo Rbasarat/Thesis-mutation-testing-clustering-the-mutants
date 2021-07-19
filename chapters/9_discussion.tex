@@ -11,6 +11,9 @@ And last we discuss the practicality of our research.
 
 \section{RQ 1: Identifying and clustering mutant characteristics}
 The maximum deviation from the original mutation score, for all variants(with and without Levenshtein distance) of the experiment, is below the statistical threshold.
+We can observe that the distance between the whiskers of the box-plots do not stretch more than the \textit{alpha-value} of 0.05.
+This means that there is not one sample that deviated more than 5\% from the original mutation score.
+Thus we can reject the null hypothesis and accept our alternative hypothesis.
 As hypothesised we observe that it is possible to cluster mutants with the set of characteristics we identified while maintaining effectiveness and reducing the amount executed.
 The hypothesis holds for all the projects and variants of the experiment.
 66\% of the displayed results have a deviation of less than 1\%. 
@@ -64,6 +67,8 @@ Clustering without Levenshtein distance characteristic is on average more accura
 
 \section{RQ 2: Training a machine learning model and clustering mutant characteristics}
 The maximum deviation from the original mutation score, for all variants(with and without Levenshtein distance characteristic) of the experiment, is above the statistical threshold.
+We can observe that the distance between whiskers of the box-plots is more than the \textit{alpha-value} of 0.05.
+Thus we cannot reject the null hypothesis and accept our alternative hypothesis.
 The biggest deviation measured is 22.39\%.
 This is significantly higher than the biggest deviation measured in the first experiment.
 56\% of the results of both variants had a deviation in mutation score bigger than 5\%.
