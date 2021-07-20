@@ -5,7 +5,7 @@
 \chapter{Related work}
 \label{ch:related_work}
 Clustering mutants has been done before.
-The research that exists tries to cluster mutants by defining the centroid of a cluster and cluster the mutants on that definition.
+The research that exists tries to cluster mutants by defining the centroid of a cluster and cluster mutants on that definition.
 In our research extends mutation clustering by defining a centroid that is dynamic.
 In other words the centroids of our clusters are defined by the mutants itself.
 
@@ -57,13 +57,13 @@ Our goal overlaps with that of Wei, the difference is that we used a different m
 Another difference is that our research does not require to know the result of a mutant(killed or survived).
 
 \section{Clustering similarity}
-Hussain et al., used the k-means and agglomerative clustering algorithm to cluster the mutants according to a similarity measure. 
+Hussain et al., used the k-means and agglomerative clustering algorithm to cluster mutants according to a similarity measure. 
 They used the Hamming distance as similarity measure.
 They calculated the distance and used this as data to feed into the clustering algorithms.
 The number of clusters and the initial position of the cluster center in the k-means algorithm are difficult to determine, and the process of the agglomerative clustering algorithm makes it difficult to correct the existing cluster formation\cite{Hussain2008}.
 They did take into account efficiency.
 Hussain et al, had the same goals as our research. 
-The difference is that our research used different and more elaborated methods to cluster the mutants.
+The difference is that our research used different and more elaborated methods to cluster mutants.
 Hussain et al., calculated the mutation score by counting one cluster as one mutant.
 Our research calculated a weighted mutation score to reflect the clusters more accurately.
 
