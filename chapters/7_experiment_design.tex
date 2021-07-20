@@ -4,7 +4,7 @@
 In this chapter we design an experiment to validate our research.
 We will execute the following steps:
 \begin{enumerate}
-    \item Gather all characteristics from PIT.
+    \item Gather all mutant characteristics from PIT.
     \item Execute full set of mutants to gather baseline measurement.
     \item Cluster the mutants according the black and white box methodologies.
     \item Execute one random mutant per cluster and gather result.
@@ -69,7 +69,7 @@ We can measure the accuracy inside a cluster by calculating a percentage of all 
 If the majority of the mutants in a cluster is killed then we consider that cluster to represent a killed cluster and the other way around for survived mutants.
 We consider the mutants that are not in the majority of the cluster as inaccuracy.
 \newline
-If the weighted mutation score of our clustered set deviates more than 5\% from the score of a full set we will reject our hypothesis.
+If the weighted mutation score of our clustered set deviates more than 5\% from the score of a full set we reject our hypothesis.
 
 \section{Random mutant selection}
 \label{ch:mutant_selection}
