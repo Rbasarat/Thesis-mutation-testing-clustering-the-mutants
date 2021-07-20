@@ -72,17 +72,15 @@ Taking into account the properties of our categorical characteristics the nomina
 Nominal encoding comprises a finite set of discrete values with no relationship between values\cite{Potdar2017AClassifiers}.
 Therefore we implement this type of encoding in the experiment.
 
-\subsection{Cluster size}
-Agglomerative hierarchical clustering will continue to cluster until there is one cluster left. 
+\subsection{Number of clusters}
+Agglomerative hierarchical clustering can continue to cluster until there is one cluster left. 
 Naturally this cluster will contain all the mutants.
 We can cut off the clustering algorithm at any point.
 We decide on the number of clusters based on the amount of mutants generated in a full set.
-The reasoning for the selecting the number of clusters will be from a performance reducing perspective.
+We select the number of clusters from a performance increasing perspective.
 Mutation clustering increases the performance by reducing the amount of mutants executed\cite{Pizzoleto2019}.
-Reducing the performance by a quarter, half or three quarters will give an indication of performance increases.
-To translate this to cluster size we will reduce the number of clusters in steps op 25\%.
-In other words by reducing the amount of mutants, for example by half, we increase the performance by 50\%\cite{Just2014AreTesting}.
-If necessary we can decide to cut off the clustering at different points.
-The baseline will consist of three experiments where the cluster size is 25\%, 50\% and 75\% of the total amount of mutants respectively.
+By reducing the amount of mutants, for example by half, we increase the performance by 50\%\cite{Just2014AreTesting}.
+As a starting point we will perform three experiments where the cluster size is 25\%, 50\% and 75\% of the total amount of mutants respectively.
+We can evaluate the results and can decide to cut off the clustering at different points.
 The amount of mutants inside a cluster will be decided by the clustering algorithm.
 \end{document}
