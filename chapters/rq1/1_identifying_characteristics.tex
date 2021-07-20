@@ -5,7 +5,7 @@
 Our goal is to cluster any mutant that fit the requirements of the selected mutation testing tools.
 We want to solve the scoping problem in existing research\cite{Ji2009,Wilinski2015,Ma2016,Wei2021SpectralTesting}.
 To achieve this we need to identify characteristics that every mutant contains. 
-In this chapter we will do a qualitative analysis on mutants and identify characteristics that are relevant for defining the means of domains as the centre of clusters. 
+As part of our white box methodology we perform a qualitative analysis on mutants and identify characteristics that are relevant for defining the means of domains as the centre of clusters. 
 
 \subsection{Overview of characteristics}
 Zhang et al., identifies several mutant characteristics\cite{Zhang2019PredictiveTesting}. 
@@ -34,7 +34,7 @@ With the combination of information extracted from PIT and characteristics selec
     \item Line number of the start of the block that contains the mutant.
     \item Line number on which the mutation occur.
 \end{enumerate}
-In the following sections we will elaborate on these characteristics.
+In the following sections we elaborate on these characteristics.
 
 \subsection{Mutant similarity}
 A piece of code is a textual representation of instructions for a computer.
@@ -88,7 +88,7 @@ A mutant may contain a return statement.
 This is dependant on the source code that is mutated.
 A return statement can be identified as a characteristic.
 If a mutant contains a return statement, we can extract its type from PIT.
-There is the possibility that a mutant does not contain a return statement, in this case we will set the mutant return type to a default value.
+There is the possibility that a mutant does not contain a return statement, in this case we set the mutant return type to a default value.
 The return type is a distinctive property of a piece of code, this distinction a useful characteristic because mutants with the same return type may be grouped together.
 
 

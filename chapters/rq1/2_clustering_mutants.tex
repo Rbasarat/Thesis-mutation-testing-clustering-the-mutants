@@ -13,7 +13,7 @@ It also states that varying the parameters of hierarchical clustering improves t
 We identified more than ten characteristics and can use them as features.
 We adjust the parameters of the algorithm based on the characteristics in our data set.
 Bases on these observations and the research of Rodriguez et al., we select hierarchical clustering as it gives us the best performance in terms of partitioning.
-Next we will explain the configuration we use for clustering the mutants. 
+Next we explain the configuration we use for clustering the mutants. 
 \newline
 Hierarchical clustering is subdivided into agglomerative and divisive. 
 The agglomerative hierarchical technique follows bottom up approach whereas divisive follows top-down approaches.
@@ -28,7 +28,7 @@ However if the clusters overlap the ward linkage outperforms the complete linkag
 We identify all characteristics per mutant as a separate cluster.
 Starting out with each mutant as a separate cluster we can use the agglomerative form of hierarchical clustering.
 Since we cannot assume that our clusters are well separated we chose to use the ward linkage method for our clustering algorithm.
-In summary, the agglomerative hierarchical clustering algorithm with ward linkage will cluster our mutants represented by the characteristics we gathered.
+In summary, we select the agglomerative hierarchical clustering algorithm with ward linkage to cluster mutants represented by the characteristics we gathered.
 
 \subsection{Levenshtein distance on Java byte code}
 A mutant is a piece of code that differs in a predefined way from its parent.
@@ -43,7 +43,7 @@ In other words PIT executes the unit tests of a source against the byte code of 
 \newline
 By calculating the distance on byte code we filter out the context that is present in Java code.
 This gives us a Levenshtein distance that represents more of the semantic difference, between a mutant and parent, than calculating the distance for Java code.
-For this characteristic we will use the Levenshtein distance between a Java byte code mutant and its parent.
+For this characteristic we use the Levenshtein distance between a Java byte code mutant and its parent.
 
 \subsection{Levenshtein distance implementation}
 There are different implementations of the Levensthein distance.
@@ -80,7 +80,7 @@ We decide on the number of clusters based on the amount of mutants generated in 
 We select the number of clusters from a performance increasing perspective.
 Mutation clustering increases the performance by reducing the amount of mutants executed\cite{Pizzoleto2019}.
 By reducing the amount of mutants, for example by half, we increase the performance by 50\%\cite{Just2014AreTesting}.
-As a starting point we will perform three experiments where the cluster size is 25\%, 50\% and 75\% of the total amount of mutants respectively.
+As a starting point we perform three experiments where the cluster size is 25\%, 50\% and 75\% of the total amount of mutants respectively.
 We can evaluate the results and can decide to cut off the clustering at different points.
-The amount of mutants inside a cluster will be decided by the clustering algorithm.
+The amount of mutants inside a cluster is be decided by the clustering algorithm.
 \end{document}

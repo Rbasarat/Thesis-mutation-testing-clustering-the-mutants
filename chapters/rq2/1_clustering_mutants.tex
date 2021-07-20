@@ -2,13 +2,13 @@
 \begin{document}
 
 \section{Selecting a machine learning model}
-In this section we will select a machine learning model.
-We will first choose between supervised or unsupervised learning.
-Our starting point for selecting a machine learning model are the models discussed in the survey done by K.L. Du.
-Based on the choice of supervised or unsupervised learning we will review the corresponding models and decide if they fit our use case by a process of elimination.
+In this section we select a machine learning model.
+We start by choosing between supervised or unsupervised learning.
+Then we look at the machine learning models that are discussed in the survey done by K.L. Du.
+Based on the choice of supervised or unsupervised learning we review the corresponding models and decide if they fit our use case by a process of elimination.
 
 \subsection{Supervised or unsupervised learning}
-In this subsection we will decide on supervised or unsupervised learning.
+In this subsection we decide on supervised or unsupervised learning.
 The application and description of these two types of learning are described in Chapter \ref{ch:background}.
 \newline
 Supervised machine learning models require a labeled data set.
@@ -37,7 +37,7 @@ The stability and plasticity properties as well as the ability to efficiently pr
 While the ART models are good at what they do, they do not fit our purpose of clustering mutants.
 As described above the ART models expect rapidly changing sequences of input patterns.
 Our data does not contain binary input patterns and it is also not rapidly changing.
-Therefore we will not select an ART model.
+Therefore we do not select an ART model.
 
 \subsection{Neural gas}
 The neural gas is a topology-preserving network, and can be treated as an extension to the C-means\cite{Du2010Clustering:Approach}.
@@ -49,17 +49,17 @@ This means that it is not necessary to know the number of clusters in advance.
 Unfortunately the neural gas network is a learning network.
 One of the properties of a learning network is that it is not designed to fit new data points\cite{supervisedUnsupervised}.
 For this reason we cannot use the neural gas network to predict in what cluster a new mutant should be placed.
-Therefore we will not select the neural gas network.
+Therefore we do not select the neural gas network.
 
 \subsection{Learning vector quantization}
 The learning vector quantization model is a supervised learning model.
 We established that we will use an unsupervised learning model to cluster mutants.
-Therefore we will not select the learning vector quantization model.
+Therefore we do not select the learning vector quantization model.
 
 \subsection{Self organizing map, C-means and fuzzy c-means}
 \label{ch:topThreeModels}
 The \acrfull{som}, C-means and \acrfull{fcm} models are all models that would fit our purpose. 
-To choose between these models we will look at the performance of each model.
+To choose between these models we look at the performance of each model.
 Mingoti et al., compared the performance of these three models \cite{Mingoti2006ComparingAlgorithms}.
 They did a Monte Carlo simulation where the cluster sizes and amount of random numbers in the data set varied each simulation\cite{Mingoti2006ComparingAlgorithms}.
 Other variables such as cluster boundaries and overlap were also controlled variables in the experiment.
@@ -83,9 +83,9 @@ To preserve these relations and context we decided to train a separate model per
 \newline
 To validate the model we need to split our data set into a training set and a validation set.
 Research has shown that if the data set is big enough a ratio of 80/20 is sufficient\cite{Guyon1997ARatio}.
-We will divide each source projects into training and validation groups to reflect the 80/20 ratio as best as possible.
+We divide each source projects into training and validation groups to reflect the 80/20 ratio as best as possible.
 Depending on the amount of mutants per project we might not achieve a perfect 80/20 ratio.
-The division of the mutants will be done randomly. 
+The division of the mutants is be done randomly. 
 To make our results reproducible we select a random division based on a generated seed.
 The seeds generated for each run will be included in the results and can be found in the Github repository\cite{rbasarat-repo}.
 
@@ -126,11 +126,11 @@ During model selection we discussed the mountain and subtractive models.
 These models are designed to estimate the number of clusters in a data set.
 The subtractive clustering model is specifically designed to approximate the number of clusters for fuzzy system models\cite{Chiu1994FuzzyEstimation}.
 It approximates the centroids and amount of the clusters based on the data points in the data set\cite{Chiu1994FuzzyEstimation}.
-We will select and implement the subtractive clustering model to estimate the number of clusters.
-We will use this number as the value for the number of clusters parameter in the \acrshort{fcm} algorithm.
+We select and implement the subtractive clustering model to estimate the number of clusters.
+We use this number as the value for the number of clusters parameter in the \acrshort{fcm} algorithm.
 
 \section{Implementation of subtractive clustering}
-For the same reasons as in Chapter \ref{ch:fcm_implementation} we will select a library that implements the subtractive clsutering algorithm.
+For the same reasons as in Chapter \ref{ch:fcm_implementation} we select a library that implements the subtractive clsutering algorithm.
 The research paper of the mountain and subtractive algorithms are referenced in the survey paper of Du et al\cite{Du2010Clustering:Approach}.
 Based on the paper of the theory of the subtractive algorithm\cite{Chiu1994FuzzyEstimation} we found an existing implementation\cite{matlabSubtractive}.
 The implementation is professionally build and maintained by Matlab\cite{matlabSubtractive}.

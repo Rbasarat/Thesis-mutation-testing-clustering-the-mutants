@@ -2,7 +2,7 @@
 \begin{document}
 \chapter{Experiment design}
 In this chapter we design an experiment to validate our research.
-We will execute the following steps:
+We execute the following steps:
 \begin{enumerate}
     \item Gather all mutant characteristics from PIT.
     \item Execute full set of mutants to gather baseline measurement.
@@ -13,7 +13,7 @@ We will execute the following steps:
 We hypothesise that we can cluster mutants with the set of characteristics we identified
 while maintaining effectiveness and reducing the amount executed when executing one mutant from each cluster that is randomly selected.
 Our goal is to achieve a weighted mutation score that is as close as possible to the mutation score of a full set of executed mutants.
-We will repeat the experiment for each approach we devised in Chapters \ref{ch:reserach_question1} and \ref{ch:reserach_question2}.
+We repeat the experiment for each approach we devised in Chapters \ref{ch:reserach_question1} and \ref{ch:reserach_question2}.
 
 \section{Project selection}
 \label{ch:project_selection}
@@ -77,10 +77,10 @@ As stated in our hypothesis we randomly select a mutant from each cluster to be 
 To validate our sample we make use of statistical hypothesis testing\cite{Emmert-Streib2019UnderstandingInference}. Our null hypothesis states that there is no relation between the characteristics identified and the results of a mutant with the chosen methodology.
 To test this hypothesis we select an alpha value of 0.05.
 To translate; if more than five percent of the values in a sample deviates more than the significance level(see Chapter \ref{ch:exp1_validation}) we cannot reject the null hypothesis.
-To make our results reproducible we will select the random mutant based on a generated seed.
+To make our results reproducible we select the random mutant based on a generated seed.
 The seed generated for each run will be included in the results and can be found in the Github repository\cite{rbasarat-repo}.
-We will repeat our experiment 30 times with 30 different seeds.
-Achieving consistent results while applying random selection will contribute to the validity of the experiment.
+We repeat our experiment 30 times with 30 different seeds.
+Achieving consistent results while applying random selection contributes to the validity of the experiment.
 
 
 \end{document}
