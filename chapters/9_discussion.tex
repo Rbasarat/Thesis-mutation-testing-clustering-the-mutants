@@ -5,7 +5,7 @@
 \label{ch:discussion}
 In this chapter, we discuss the results of our experiments on clustering mutants.
 First, we discuss the results of the white box approach. 
-The results are discussed as one and are compared between the variations(with Levenshtein distance characteristic and without).
+The results are discussed as one and are compared between the variants(with Levenshtein distance characteristic and without).
 Second we discuss the results of the black box approach and compare them to those of the white box approach.
 And last we discuss the practicality of our research.
 
@@ -17,7 +17,7 @@ Thus we can reject the null hypothesis and accept our alternative hypothesis.
 As hypothesised we observe that it is possible to cluster mutants with the set of characteristics we identified while maintaining effectiveness and reducing the amount executed.
 The hypothesis holds for all the projects and variants of the experiment.
 66\% of the displayed results have a deviation of less than 1\%. 
-This includes both variations of the experiment.
+This includes both variants of the experiment.
 \newline
 The results prove that the relations between the mutants represented by the characteristics we identified can be used to cluster mutants efficiently. 
 This can be explained by the correlation between the result of a mutant, the calculated euclidean distance and the distance threshold(linkage criteria) used to decide whether a mutants should be clustered together.
@@ -26,7 +26,7 @@ If two mutants are grouped it is \textit{n} percent likely that the mutants have
 \begin{finding}
     When executing 25\% of the total amount of mutants we can still maintain effectiveness.
 \end{finding}
-In both variations of the experiment we observe a reduction in average accuracy when increasing the performance by reducing the number of clusters.
+In both variants of the experiment we observe a reduction in average accuracy when increasing the performance by reducing the number of clusters.
 These reductions are 0.1\% and 0.04\% for clustering with and without Levenshtein distance respectively.
 We can also see that the average cluster accuracy is lower when reducing the amount executed.
 \begin{finding}
