@@ -7,12 +7,12 @@ With the mutants represented it is possible to cluster them.
 The following sections describes the methodology for our white box approach of clustering mutants.
 
 \subsection{Hierarchical clustering}
-Clustering Levenshtein distances has been done before with hierarchical clustering\cite{Rajalingam2011, Gothai2010PerformanceAlgorithms}. 
+Clustering Levenshtein distances has been done before with hierarchical clustering with promising results.\cite{Rajalingam2011, Gothai2010PerformanceAlgorithms}. 
 Research shows that hierarchical clustering performs better when clustering with at least ten features\cite{Rodriguez2019}.
 It also states that varying the parameters of hierarchical clustering improves the performance compared to that of the default settings of the algorithm\cite{Rodriguez2019}.
 We identified more than ten characteristics and can use them as features.
 We adjust the parameters of the algorithm based on the characteristics in our data set.
-Bases on these observations we select hierarchical clustering to cluster the mutants.
+Bases on these observations and the research of Rodriguez et al., we select hierarchical clustering as it gives us the best performance in terms of partitioning.
 Next we will explain the configuration we use for clustering the mutants. 
 \newline
 Hierarchical clustering is subdivided into agglomerative and divisive. 

@@ -37,17 +37,36 @@ This can have different reasons, for example, the data set used to validate the 
 This research focuses on clustering mutants and use of existing clustering algorithms. 
 Many different types of clustering algorithms have been proposed\cite{Rodriguez2019}. While there is a lot of diversity, some methods are more frequently used than others\cite{Wu2008TopMining}. 
 Rodriguez et al., compared the performance of nine different clustering algorithms:
-\begin{itemize}
-    \item k-means
-    \item CLARA
-    \item hierarchical
-    \item EM
-    \item hcmodel
-    \item spectral
-    \item subscpace
-    \item optics
-    \item dbscan
-\end{itemize}
+
+\subsubsection{K-means} 
+The K-means algorithm identifies \textit{k} number of centroids, and then allocates every data point to the nearest cluster, while keeping the centroids as small as possible\cite{Hartigan1979AlgorithmAlgorithm}.
+\subsubsection{CLARA} 
+CLARA uses multiple fixed samples of the data set to minimize sampling bias and, select the best medoids among those samples\cite{Sarle1991FindingAnalysis.}.
+A medoid is defined as the object \textit{i} for which the average dissimilarity to all other objects in its cluster is minimal\cite{Sarle1991FindingAnalysis.}.
+\subsubsection{Hierarchical clustering} 
+Hierarchical clustering groups similar objects into groups called clusters\cite{Fraley1998HowAnalysis}. 
+The endpoint is a set of clusters or groups, where each cluster is distinct from each other cluster, and the objects within each cluster are broadly similar to each other\cite{Fraley1998HowAnalysis}.
+\subsubsection{EM} 
+EM(expectation maximization) clustering technique is similar to the K-Means technique\cite{Fv1996TheAlgorithm}.
+Instead of assigning examples to clusters to maximize the differences in means for continuous variables, the EM clustering algorithm computes probabilities of cluster memberships based on one or more probability distributions\cite{Fv1996TheAlgorithm}. 
+\subsubsection{Spectral clustering}
+Spectral clustering is a technique with roots in graph theory.
+It identifies communities of nodes in a graph based on the edges connecting them\cite{Filippone2008AClustering}.
+Spectral clustering uses information from the eigenvalues of special matrices built from the graph or the data set  to perform dimensionality reduction before clustering in fewer dimensions\cite{Filippone2008AClustering}. 
+The similarity matrix is provided as an input and consists of a quantitative assessment of the relative similarity of each pair of points in the data set\cite{Filippone2008AClustering}.
+\subsubsection{Subspace}
+Subspace clustering algorithms consider the similarity between objects with respect to distinct subsets of the attributes\cite{Hartigan1979AlgorithmAlgorithm}. 
+Different subsets of the attributes might define distinctions between each other. 
+The algorithm can identify clusters that exist in multiple, possibly overlapping, sub spaces\cite{M2016SUBSPACEDATA}.
+\subsubsection{Dbscan}
+Dbscan is a density-based clustering non-parametric algorithm\cite{Daszykowski2009}.
+Given a set of points in some space, it groups together points that are closely packed together, marking outliers as points that lie alone in low-density regions\cite{Daszykowski2009}.
+\subsubsection{OPTICS}
+The OPTICS(Ordering Points To Identify the Clustering Structure) algorithm starts with a data point and expands its neighborhood using a similar procedure as in the Dbscan algorithm\cite{Ankerst1999OPTICS:Structure}.
+The difference is that the neighborhood is first expanded to points with low core-distance\cite{Ankerst1999OPTICS:Structure}. 
+The optics algorithm can detect clusters having large density variations and irregular shapes\cite{Ankerst1999OPTICS:Structure}.
+\newline 
+
 The goal of their study was to guide researchers, who have little experience in data mining techniques, to the application of clustering methods.
 They evaluated the algorithms in three distinct situations: default parameters, single parameter variation and random variation of parameters.
 They used 400 generated artificial data sets which were normally distributed.
