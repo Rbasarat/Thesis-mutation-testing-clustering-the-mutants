@@ -21,9 +21,8 @@ The \textit{false negative} is a problem when breaking changes are not detected 
 To solve this issue we can measure the fault detecting capability of a test suite, this is called the test suite effectiveness.
 Test suite effectiveness is measured by the number of faulty versions of a \acrfull{sut} that are detected by a test suite.
 Real faults are unknown in advance, we can use mutation testing as a proxy measurement. 
-Research has found statistically significant evidence which correlates mutant detection with real fault detection\cite{Just2014AreTesting}.
+Existing research has found statistically significant evidence which correlates mutant detection with real fault detection\cite{Just2014AreTesting}.
 \newline
-\todo[inline]{is this your approach? the current general approach?}
 Mutation testing tools create small faulty versions of the program.
 The test suite is then run to verify if these faults are detected.
 These faults are called mutants and are created by mutators.
@@ -42,7 +41,6 @@ A lot of techniques and methods have been developed to improve the performance, 
 \newline
 A technique to reduce the number of mutants or the number of test case executions is mutation clustering.
 Mutation clustering aims to reduce the amount of mutants to be executed by clustering mutants\cite{Ma2016,Yu2019PossibilityScope}.
-Clustering is a technique used for the grouping of data, for pattern recognition and classification, based on some similar characteristics\cite{Alsabti1997}.
 The clustering of mutants has been researched with promising results\cite{Ji2009,Wilinski2015,Ma2016}. For example Ma et al., \cite{Ma2016} clustered the mutants for expressions. 
 However in their paper they indicate that the choosing expressions as the domain of their cluster is a limitation.
 A recurring problem in the research of mutation clustering is to determine the means of domains as the centre of a cluster\cite{Ji2009,Wilinski2015,Ma2016,Wei2021SpectralTesting}.
@@ -51,7 +49,10 @@ To reduce the cost of mutation testing, we try to find a solution that can clust
 Our goal is to cluster any mutant that is generated within the Java programming language.
 This research aims to remove the scoping limitations present in existing research.
 There should be no requirements for which mutants can be clustered.
-We will do this with two different approaches: qualitative and quantitative. 
+We do this with two different techniques: qualitative and quantitative.
+We devise a white and black box approach for clustering mutants.
+Our white box approach contains a qualitative analysis on mutants and a methodology to cluster them.
+The black box approach makes use of a machine learning model to cluster mutants.
 We structure our research on the following research questions:
 \newline
 \textbf{Research Question 1}: What set of characteristics can we identify for clustering generated mutants to reduce the amount executed, while maintaining effectiveness?
