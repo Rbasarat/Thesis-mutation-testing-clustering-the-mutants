@@ -1,4 +1,17 @@
+\newif\ifdraft
+
+% Set the below value to \drafttrue to use draft formatting or
+% \draftfalse to enable "production" formatting
+\draftfalse
+
+\ifdraft
+\documentclass[conference,draftclsnofoot,onecolumn]{IEEEtran}
+\usepackage{fontspec}
+\setmainfont{OpenDyslexic}
+\else
 \documentclass[conference]{IEEEtran}
+\fi
+
 \IEEEoverridecommandlockouts
 % The preceding line is only needed to identify funding in the first footnote. If that is unneeded, please comment it out.
 % \usepackage{cite}
@@ -21,10 +34,6 @@
 \usepackage[backend=biber, style=ieee, citestyle=numeric-comp,uniquelist=false, maxcitenames=2, maxbibnames=9, mincitenames=1]{biblatex}
 \bibliography{../main}
 \bibliography{../custom}
-
-%% uncomment this and change compiler to xelatex %%% Thomas uncomment over here
-%\usepackage{fontspec}
-%\setmainfont{OpenDyslexic}
 
 \usepackage{listings}
 \lstset{
