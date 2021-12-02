@@ -15,7 +15,6 @@
 \IEEEoverridecommandlockouts
 % The preceding line is only needed to identify funding in the first footnote. If that is unneeded, please comment it out.
 % \usepackage{cite}
-\usepackage{amsmath,amssymb,amsfonts}
 \usepackage{algorithmic}
 \usepackage{graphicx}
 \usepackage{textcomp}
@@ -24,14 +23,14 @@
 \usepackage{caption}
 \usepackage{subcaption}
 \usepackage{hyperref}
-
+\usepackage{amsmath,amssymb}
 \usepackage[flushleft]{threeparttable}
 \usepackage{tabularx}
-
 \usepackage[disable]{todonotes}
 \usepackage{enumitem}
-
 \usepackage[backend=biber, style=ieee, citestyle=numeric-comp,uniquelist=false, maxcitenames=2, maxbibnames=9, mincitenames=1]{biblatex}
+\usepackage{multirow}
+
 \bibliography{../main}
 \bibliography{../custom}
 
@@ -142,17 +141,75 @@ Our research makes the following contributions:
 %%%%%% DO RESEARCH PART HERE %%%%%%%%
 
 \section{Selecting a mutation testing tool}
-We reviewed literature on three different mutation testing tools[CITE OWN PAPER HERE].
+To cluster mutants we need to select a tool that generate mutants and executes mutants.
+Such tools are called mutation testing tools.
+Our goal is to find the tool that generates the most amount of mutants. 
+\newline
+We reviewed literature on three different mutation testing tools\todo{CITE OWN PAPER HERE}.
 However the most recent study is from 2017.
 At the time of writing this paper these studies are at least four years old. 
 Some of the tools were updated or are still under active development\cite{pit-releases,Major}.
 There are three candidate tools; Major, MuJava and PIT.
 We extend the existing mutant operator comparison with the operators that have been added since the publishing date of the existing literature.
-Additionally we add an overview of the overlapping mutant operators for the new mutant operators.
+In Table \ref{tab:mutators-current} shows the comparison of operators that were added.
+\begin{table*}[htb]
+\centering
+\begin{tabular}{|l|l|l|l|}
+\hline
+\multicolumn{2}{|c|}{\textbf{ MuJava}}                           & \multicolumn{2}{|c|}{\textbf{PIT}}                      \\ \hline
+IHD & Hiding variable deletion                                  & EM                    & Empty Returns                   \\ \hline
+IHI & Hiding variable   insertion                               & FR                    & False Returns                   \\ \hline
+IOD & Overriding method   deletion                              & NR                    & Null Returns                    \\ \hline
+IOP & Overriding method   calling position change               & TR                    & True Returns                    \\ \hline
+IOR & Overriding method   rename                                & PR                    & Primitive Returns               \\ \hline
+ISI & Super keyword insertion                                   & ER                    & Experimental Switch             \\ \hline
+ISD & Super keyword deletion                                    & BI                    & Big Integer                     \\ \hline
+IPC & Explicit call to a   parent’s constructor deletion        & NRC                   & Naked Receiver                  \\ \hline
+PNC & New method call with   child class type                   & N                     & Negation                        \\ \hline
+PMD & Member variable   declaration with parent class type      & AOR                   & Arithmic Operator Replacement   \\ \hline
+PPD & Parameter variable   declaration with child class type    & AOD                   & Arithmic Operator Deletion      \\ \hline
+PCI & Type cast operator   insertion                            & CR                    & Constant replacement            \\ \hline
+PCC & Cast type change                                          & BO                    & Bitwise Operator                \\ \hline
+PCD & Type cast operator   deletion                             & ROR                   & Relational Operator Replacement \\ \hline
+PRV & Reference assignment   with other comparable variable     & UOI                   & Unary Operation Insertion       \\ \hline
+OMR & Overloading method   contents replace                     & \multicolumn{1}{l|}{} &                                 \\ \hline
+OMD & Overloading method   deletion                             & \multicolumn{1}{l|}{} &                                 \\ \hline
+OAC & Arguments of   overloading method call change             & \multicolumn{1}{l|}{} &                                 \\ \hline
+JTI & This keyword insertion                                    & \multicolumn{1}{l|}{} &                                 \\ \hline
+JTD & This keyword deletion                                     & \multicolumn{1}{l|}{} &                                 \\ \hline
+JSI & Static modifier   insertion                               & \multicolumn{1}{l|}{} &                                 \\ \hline
+JSD & Static modifier   deletion                                & \multicolumn{1}{l|}{} &                                 \\ \hline
+JID & Member variable   initialization deletion                 & \multicolumn{1}{l|}{} &                                 \\ \hline
+JDC & Java-supported default   constructor deletion             & \multicolumn{1}{l|}{} &                                 \\ \hline
+EOA & Reference assignment   and content assignment replacement & \multicolumn{1}{l|}{} &                                 \\ \hline
+EOC & Reference comparison   and content comparison replacement & \multicolumn{1}{l|}{} &                                 \\ \hline
+EAM & Acessor method change                                     & \multicolumn{1}{l|}{} &                                 \\ \hline
+EMM & Modifier method change                                    & \multicolumn{1}{l|}{} &                                 \\ \hline
+\end{tabular}
+\caption{\label{tab:mutators-current}Current mutators supported.}
+\end{table*}
+Table \ref{tab:mutators-overlap} we show an overview of the overlapping mutant operators for the added mutant operators.
 
+\begin{table*}[htb]
+\centering
+\begin{tabular}{|l|l|l|l|}
+\hline
+\multicolumn{2}{|c|}{\textbf{ MuJava mutator}}      & \multicolumn{2}{c|}{\textbf{PIT mutator}}                         \\ \hline
+AORB & Arithmetic Operator Replacement Binary      & \multirow{4}{*}{M}   & \multirow{4}{*}{Math}                      \\ \cline{1-2}
+ASRS & Short-Cut Assignment   Operator Replacement &                      &                                            \\ \cline{1-2}
+SOR  & Shift Operator   Replacement                &                      &                                            \\ \cline{1-2}
+COR  & Conditional Operator   Replacement          &                      &                                            \\ \hline
+AOIU & Arithmetic Operator   Insertion Unary       & \multirow{2}{*}{UOI} & \multirow{2}{*}{Unary Operation Insertion} \\ \cline{1-2}
+AOIS & Arithmetic Operator   Insertion Short-cut   &                      &                                            \\ \hline
+ODL  & Operator Deletion                           & AOD                  & Arithmic Operator   Deletion               \\ \hline
+AODS & Arithmetic Operator   Deletion Short-cut    & RI                   & Remove Increments                          \\ \hline
+ROR  & Relational Operator   Replacement           & CB                   & Conditionals Boundary                      \\ \hline
+AORS & Arithmetic Operator   Replacement Short-Cut & I                    & Increments                                 \\ \hline
+COD  & Conditional Operator   Deletion             & RC                   & Remove Conditionials                       \\ \hline
 
-\todo{show tables here? maybe a summarized version of this?}
-\todo{the results can be found in ref to paper??}
+\end{tabular}
+\caption{\label{tab:mutators-overlap}Overview of mutator overlaps between  MuJavav and PIT}
+\end{table*}
 
 MuJava is not actively maintained and has not been updated in the last few years.
 It does not support JUnit 4 and all versions of TestNG\cite{mujava}.
@@ -161,19 +218,145 @@ MuJava also does not support source projects with java version 1.7 or higher\cit
 Conforming to these requirements would reduce the set of projects we could use in or experiments.
 \newline
 While Major supports JUnit 4,
-we did not succeed in generating mutants with this tool[CITE OWN PAPER HERE].
+we did not succeed in generating mutants with this tool\todo{CITE OWN PAPER HERE}.
 It would be too time consuming to customize all source projects to work with Major.
 Furthermore there is not much documentation available for this tool.
 \newline
 PIT targets the industry, is actively maintained and is open source\cite{Kintis2016AnalysingStudy}.
 It supports Maven, Gradle, has a command line interface and has a faster execution time than the other tools.
 For example PIT provides a plugin system in which you can inject your own code in various stages of mutation testing process\cite{pit}.
-PIT also generated significantly more mutants in every project we have tested[CITE OWN PAPER HERE].
+PIT also generated significantly more mutants in every project we have tested\todo{CITE OWN PAPER HERE}.
 Based on the information presented in this chapter we decide that PIT is the best choice for generating and executing mutants for this research.
 
-
 \section{Qualitative clustering approach}
+\label{ch:reserach_question1}
+The following sections describe the white box approach for clustering mutants.
+We perform a qualitative analysis on mutants to identify characteristics. 
+These characteristics represent the mutants.
+With the mutants represented we devise a methodology for clustering mutants.
+Our goal is to cluster every mutant that is generated while maintaining effectiveness.
+
+\subsection{Identifying characteristics}
+\label{ch:identifying_characteristics}
+Zhang et al., identifies several mutant characteristics\cite{Zhang2019PredictiveTesting}. 
+The goal of their research is detecting as accurate as possible whether a mutant survives or not before executing the mutant.
+The mutant characteristics identified by Zhang et al., have been used in other research with promising results\cite{Oonk2021}.
+While the goal of their research is different than ours, we can still use the characteristics they identified.
+We select characteristics relevant to our research from the research of Zhang et al., and Oonk\cite{Oonk2021}.
+We extend the list of characteristics with data we can extract from the selected mutation testing tool. 
+\newline
+PIT generates and executes mutants on byte code level\cite{pitestBytecode}.
+By mutating in Java byte code we can identify characteristics specific to Java byte code.
+PIT also gathers mutant metadata.
+We can extract this mutant metadata and identify characteristics. 
+With the combination of information extracted from PIT and characteristics selected from existing research we identify the following characteristics\todo{CITE OWN PAPER HERE}:
+\begin{enumerate}
+    \item Mutant similarity.
+    \item Amount of tests the mutant is challenged by.
+    \item Mutator identifier.
+    \item Mutant opcode.
+    \item Mutant return type.
+    \item Mutant contains local variables.
+    \item Mutant is in try catch block.
+    \item Mutant is in finally block.
+    \item Name of class that contains the mutant.
+    \item Name of function that contains the mutant.
+    \item Line number of the start of the block that contains the mutant.
+    \item Line number on which the mutation occur.
+\end{enumerate}
+
+\subsection{Levenshtein distance}
+A piece of code is a textual representation of instructions for a computer.
+A mutant is a transformation of a piece of code.
+This transformation is predefined.
+The difference between a mutant and its parent can be defined as similarity.
+We identify the similarity between a mutant and parent as a characteristic.
+\newline
+To measure this characteristic we select a similarity measure.
+There are existing similarities measures that base their similarity in different ways\cite{Gomma2013AApproaches}. 
+\newline
+The Levenshtein distance defines the distance between two strings by counting the minimum number of operations(create/edit/delete) needed to transform one string into the other\cite{Gomma2013AApproaches}.
+The more the textual representation of a mutant differs from its parent the bigger the Levenshtein distance will be.
+A unit test tests a small piece of code.
+The more this piece of code differs from its original the more likely it is the test will fail.
+The Levenshtein distance measures this difference.
+We select the Levenshtein distance as similarity measure for our research\cite{Gomma2013AApproaches}.
+\newline
+A mutant is a piece of code that differs in a predefined way from its parent.
+Java source code compiles into Java byte code.
+During the compilation of Java code certain context is abstracted away\cite{byteCodeEngineering}.
+Optimisations are applied which also changes the Java byte code\cite{byteCodeEngineering}.
+As a result the textual similarity between a Java code mutant and its parent is different from the similarity between a Java byte code mutant and its parent.
+While the textual similarity may be different between the Java code and Java byte code the functionality remains the same.
+Java byte code reflects more of the semantic nature of the source code than the source code itself does. 
+PIT generates and executes mutants on byte code level\cite{pitestBytecode}. 
+In other words PIT executes the unit tests of a source against the byte code of a mutant.
+\newline
+By calculating the distance on byte code we filter out the context that is present in Java code.
+This gives us a Levenshtein distance that represents more of the semantic difference, between a mutant and parent, than calculating the distance for Java code.
+For this characteristic we use the Levenshtein distance between a Java byte code mutant and its parent.
+
+
+\subsection{Hierarchical clustering}
+Clustering Levenshtein distances has been done before with hierarchical clustering with promising results.\cite{Rajalingam2011, Gothai2010PerformanceAlgorithms}. 
+Research shows that hierarchical clustering performs better when clustering with at least ten features\cite{Rodriguez2019}.
+It also states that varying the parameters of hierarchical clustering improves the performance compared to that of the default settings of the algorithm\cite{Rodriguez2019}.
+We identified more than ten characteristics and can use them as features.
+We adjust the parameters of the algorithm based on the characteristics in our data set.
+Bases on these observations and the research of Rodriguez et al., we select hierarchical clustering as it gives us the best performance in terms of partitioning.
+Next we explain the configuration we use for clustering the mutants. 
+\newline
+Hierarchical clustering is subdivided into agglomerative and divisive. 
+The agglomerative hierarchical technique follows bottom up approach whereas divisive follows top-down approaches.
+Hierarchical clustering uses different metrics which calculates the euclidean distance between two clusters and the linkage criteria\cite{Rajalingam2011}. 
+The linkage criteria specifies the dissimilarity in the sets as a function of the pair-wise distances of observations in those sets\cite{Rajalingam2011}.
+We reviewed the different linkage criteria and concluded the following.
+\newline
+Research shows that the complete linkage outperforms the single linkage method\cite{Vijaya2019ComparativeClustering}.
+The ward linkage and complete linkage methods perform the same when clusters are well separated\cite{Vijaya2019ComparativeClustering}.
+However if the clusters overlap the ward linkage outperforms the complete linkage\cite{Vijaya2019ComparativeClustering}.
+\newline
+We identify all characteristics per mutant as a separate cluster.
+Starting out with each mutant as a separate cluster we can use the agglomerative form of hierarchical clustering.
+Since we cannot assume that our clusters are well separated we chose to use the ward linkage method for our clustering algorithm.
+In summary, we select the agglomerative hierarchical clustering algorithm with ward linkage to cluster mutants represented by the characteristics we gathered.
+
+\subsection{Categorical data}
+There are different categorical variable encoding techniques available\cite{Potdar2017AClassifiers}.
+The categorical characteristics we use have no particular ranking compared to each other.
+There is also no specific order to the characteristics.
+I.e. a return type void is not better or worse than a return type string.
+The same goes for the location characteristics, there is no location that should have a bigger weight than the other locations.
+The individual characteristics do contain a finite set of values.
+For example multiple mutants may contain the same class name.
+The hierarchical clustering algorithm needs all characteristics in a numerical form\cite{Vijaya2019ComparativeClustering}.
+The characteristics mutator identifier, class name, method name and return type are non numerical.
+To deal with this problem we apply categorical variable encoding to these specific features.
+Taking into account the properties of our categorical characteristics the nominal variable encoding fits our requirements.
+Nominal encoding comprises a finite set of discrete values with no relationship between values\cite{Potdar2017AClassifiers}.
+Therefore we implement this type of encoding in the experiment.
+
+\subsection{Number of clusters}
+Agglomerative hierarchical clustering can continue to cluster until there is one cluster left. 
+Naturally this cluster will contain all the mutants.
+We can cut off the clustering algorithm at any point.
+We decide on the number of clusters based on the amount of mutants generated in a full set.
+We select the number of clusters from a performance increasing perspective.
+Mutation clustering increases the performance by reducing the amount of mutants executed\cite{Pizzoleto2019}.
+By reducing the amount of mutants, for example by half, we increase the performance by 50\%\cite{Just2014AreTesting}.
+As a starting point we perform three experiments where the cluster size is 25\%, 50\% and 75\% of the total amount of mutants respectively.
+We can evaluate the results and can decide to cut off the clustering at different points.
+The amount of mutants inside a cluster is be decided by the clustering algorithm.
+
+
+
 \section{Quantitative clustering approach}
+In the following sections we devise a black box approach for clustering mutants.
+We make use of the characteristics identified in Chapter \ref{ch:identifying_characteristics}.
+While our goal remains the same as in Chapter \ref{ch:reserach_question1}, the method to achieve it is different.
+
+
+
 \section{validation}
 
 
